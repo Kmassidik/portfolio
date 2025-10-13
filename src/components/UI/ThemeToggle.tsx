@@ -12,10 +12,10 @@ const ThemeToggle = ({ darkMode, setDarkMode }: ThemeToggleProps) => {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={() => setDarkMode(!darkMode)}
-      className={`
-        w-full mt-8 py-3 font-semibold
+      className={`cursor-pointer
+        w-full md:mt-4 md:py-3 font-semibold
         transition-colors duration-300 ease-in-out
-        flex items-left justify-left gap-2
+        flex items-center justify-center md:items-left md:justify-left gap-2
         ${darkMode ? "text-[#F5EFE7]" : "text-[#213555]"}
       `}
     >

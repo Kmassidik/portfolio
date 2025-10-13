@@ -29,7 +29,7 @@ function App() {
       <div className="flex flex-col md:flex-row min-h-screen md:container md:mx-auto ">
         <Sidebar darkMode={darkMode} setDarkMode={setDarkMode} />
 
-        <main className="flex-auto overflow-y-auto">
+        <main className="flex-auto overflow-y-auto md:my-10">
           <Navigation
             activeSection={activeSection}
             setActiveSection={setActiveSection}

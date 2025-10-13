@@ -40,3 +40,20 @@ const About = ({ darkMode }: AboutProps) => {
 };
 
 export default About;
+
+/* Hi there! 👋
+I'm a full-stack developer passionate about creating elegant solutions to complex problems. Currently specializing in React, TypeScript, and Node.js.
+
+What I Do
+🎨 Craft beautiful, responsive user interfaces
+⚡ Build scalable backend systems
+🔧 Optimize performance and user experience
+🌱 Contribute to open-source projects
+Quick Facts
+🏠 Based in San Francisco, CA
+💼 5+ years of professional experience
+🎓 Computer Science @ Stanford
+☕ Coffee addict & night owl
+🎮 Gaming enthusiast when not coding
+Let's Connect
+Feel free to reach out for collaborations or just a friendly chat about tech! */
