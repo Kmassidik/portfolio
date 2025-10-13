@@ -14,32 +14,33 @@ const Navigation = ({
   darkMode,
 }: NavigationProps) => {
   return (
-    <nav
-      className={`${
-        darkMode ? "bg-gray-800" : "bg-white"
-      } shadow-md sticky top-0 z-10`}
-    >
-      <div className="flex gap-2 p-4 overflow-x-auto">
+    <nav className={`${darkMode ? "bg-[#1a1a1a]" : "bg-slate-50"}`}>
+      <div className="flex items-center justify-center gap-6 border-b border-b-gray-200 dark:border-b-[#494949] overflow-x-auto p-2">
         {sections.map((section) => (
-          <motion.button
+          <button
             key={section}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             onClick={() =>
               setActiveSection(section.toLowerCase().replace(" ", ""))
             }
-            className={`px-6 py-2 rounded-full whitespace-nowrap transition-colors ${
+            className={`relative py-2 text-sm font-medium transition-colors whitespace-nowrap ${
               activeSection === section.toLowerCase().replace(" ", "")
                 ? darkMode
-                  ? "bg-[#3E5879] text-white"
-                  : "bg-[#213555] text-white"
+                  ? "text-white"
+                  : "text-slate-900"
                 : darkMode
-                ? "bg-gray-700 text-gray-300"
-                : "bg-[#D8C4B6] text-[#213555]"
+                ? "text-gray-400 hover:text-white"
+                : "text-slate-500 hover:text-slate-900"
             }`}
           >
             {section}
-          </motion.button>
+            {activeSection === section.toLowerCase().replace(" ", "") && (
+              <motion.div
+                layoutId="activeSection"
+                className="absolute bottom-0 left-0 right-0 h-1 bg-orange-500"
+                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+              />
+            )}
+          </button>
         ))}
       </div>
     </nav>

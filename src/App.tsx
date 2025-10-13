@@ -23,13 +23,13 @@ function App() {
   return (
     <div
       className={`min-h-screen ${
-        darkMode ? "bg-gray-900" : "bg-[#F5EFE7]"
+        darkMode ? "bg-[#1a1a1a]" : "bg-white"
       } transition-colors duration-300`}
     >
-      <div className="flex flex-col md:flex-row min-h-screen">
+      <div className="flex flex-col md:flex-row min-h-screen md:container md:mx-auto ">
         <Sidebar darkMode={darkMode} setDarkMode={setDarkMode} />
 
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-auto overflow-y-auto">
           <Navigation
             activeSection={activeSection}
             setActiveSection={setActiveSection}
