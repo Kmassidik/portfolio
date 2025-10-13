@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import {
-  Download,
-  DownloadIcon,
+  ChevronDown,
+  FileUserIcon,
   Github,
   Linkedin,
   MapPin,
   Twitter,
 } from "lucide-react";
+
 import ThemeToggle from "../UI/ThemeToggle";
 
 interface SidebarProps {
@@ -26,13 +27,14 @@ const Sidebar = ({ darkMode, setDarkMode }: SidebarProps) => {
       animate={{ x: 0, opacity: 1 }}
       className={`
         md:w-80 w-full 
-        h-screen md:h-auto 
+        min-h-screen md:h-auto 
         ${bgColor} ${textColor} 
-        p-8 flex flex-col items-center md:items-start justify-center 
+        p-8 flex flex-col items-center justify-center
         transition-colors duration-300 ease-in-out
+        overflow-y-auto md:overflow-visible
       `}
     >
-      <div className="w-full max-w-sm">
+      <div className="w-full max-w-sm mx-auto md:mx-0">
         {/* Avatar */}
         <motion.div
           whileHover={{ scale: 1.05 }}
@@ -46,7 +48,7 @@ const Sidebar = ({ darkMode, setDarkMode }: SidebarProps) => {
         </motion.div>
 
         {/* Text only centered on mobile */}
-        <div className="text-center md:text-left">
+        <div className="text-center md:text-justify">
           <h1 className="text-2xl font-bold mb-1">Kurnia Massidik</h1>
           <p className={`${subTextColor} text-sm mb-4`}>Kmassidik · he/him</p>
 
@@ -80,56 +82,64 @@ const Sidebar = ({ darkMode, setDarkMode }: SidebarProps) => {
 
         {/* Social icons */}
         <div className="flex gap-6 justify-center md:justify-start mb-8">
-          <motion.a
-            whileHover={{ scale: 1.2 }}
-            href="https://github.com/kmassidik"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${subTextColor} ${
-              darkMode ? "hover:text-white" : "hover:text-gray-900"
-            } transition-colors duration-300`}
-          >
-            <Github size={20} />
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.2 }}
-            href="https://www.linkedin.com/in/kurnia-massidik-3b176b149/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${subTextColor} ${
-              darkMode ? "hover:text-white" : "hover:text-gray-900"
-            } transition-colors duration-300`}
-          >
-            <Linkedin size={20} />
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.2 }}
-            href="https://x.com/KMassidik"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${subTextColor} ${
-              darkMode ? "hover:text-white" : "hover:text-gray-900"
-            } transition-colors duration-300`}
-          >
-            <Twitter size={20} />
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.2 }}
-            href="https://x.com/KMassidik"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${subTextColor} ${
-              darkMode ? "hover:text-white" : "hover:text-gray-900"
-            } transition-colors duration-300`}
-          >
-            <DownloadIcon size={20} />
-          </motion.a>
+          {[
+            {
+              href: "https://github.com/kmassidik",
+              icon: <Github size={20} />,
+            },
+            {
+              href: "https://www.linkedin.com/in/kurnia-massidik-3b176b149/",
+              icon: <Linkedin size={20} />,
+            },
+            {
+              href: "https://x.com/KMassidik",
+              icon: <Twitter size={20} />,
+            },
+            {
+              href: "https://drive.google.com/file/d/1UoH16iPNAdU0RzlaIk0m6h-Lb3kfvm9p/view?usp=drive_link",
+              icon: <FileUserIcon size={20} />,
+            },
+          ].map(({ href, icon }, idx) => (
+            <motion.a
+              key={idx}
+              whileHover={{ scale: 1.2 }}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${subTextColor} ${
+                darkMode ? "hover:text-white" : "hover:text-gray-900"
+              } transition-colors duration-300`}
+            >
+              {icon}
+            </motion.a>
+          ))}
         </div>
 
         {/* Theme toggle */}
         <div className="flex justify-center md:justify-start">
           <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
         </div>
+      </div>
+      {/* Bouncing “scroll down” text */}
+      <div className="flex items-center justify-center mt-28 md:mt-0 md:hidden">
+        <motion.div
+          animate={{ y: [0, -6, 0] }}
+          transition={{
+            duration: 1.2,
+            repeat: Infinity,
+            repeatType: "loop",
+            ease: "easeInOut",
+          }}
+          className="flex items-center gap-2 text-sm font-medium"
+        >
+          <ChevronDown
+            size={16}
+            className={`${subTextColor} animate-pulse transition-colors`}
+          />
+          <span className={`${subTextColor} font-semibold tracking-wide`}>
+            Scroll Down
+          </span>
+        </motion.div>
       </div>
     </motion.aside>
   );
