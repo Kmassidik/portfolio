@@ -22,50 +22,84 @@ function App() {
 
   return (
     <div
-      className={`min-h-screen md:h-screen ${
+      className={`min-h-screen ${
         darkMode ? "bg-[#1a1a1a]" : "bg-white"
       } transition-colors duration-300`}
     >
-      <div className="flex flex-col md:flex-row h-full md:container md:mx-auto">
+      <div className="flex flex-col md:flex-row min-h-screen md:container md:mx-auto">
         <Sidebar darkMode={darkMode} setDarkMode={setDarkMode} />
 
-        <main className="flex-1 flex flex-col overflow-hidden md:my-10">
+        <main className="flex-1 flex flex-col md:h-screen md:my-10 overflow-hidden">
           <Navigation
             activeSection={activeSection}
             setActiveSection={setActiveSection}
             darkMode={darkMode}
           />
 
-          <div className="flex-1 overflow-y-auto p-8">
-            <AnimatePresence mode="wait">
-              {activeSection === "aboutme" && <About darkMode={darkMode} />}
+          <div className="flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar">
+            <div className="p-4 md:p-8 pb-8 md:pb-12">
+              <style>{`
+                .custom-scrollbar::-webkit-scrollbar {
+                  width: 8px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-track {
+                  background: transparent;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb {
+                  background: ${
+                    darkMode
+                      ? "rgba(156, 163, 175, 0.3)"
+                      : "rgba(203, 213, 225, 0.5)"
+                  };
+                  border-radius: 4px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                  background: ${
+                    darkMode
+                      ? "rgba(156, 163, 175, 0.5)"
+                      : "rgba(203, 213, 225, 0.8)"
+                  };
+                }
+                /* For Firefox */
+                .custom-scrollbar {
+                  scrollbar-width: thin;
+                  scrollbar-color: ${
+                    darkMode
+                      ? "rgba(156, 163, 175, 0.3)"
+                      : "rgba(203, 213, 225, 0.5)"
+                  } transparent;
+                }
+              `}</style>
+              <AnimatePresence mode="wait">
+                {activeSection === "aboutme" && <About darkMode={darkMode} />}
 
-              {activeSection === "showcase" && (
-                <Showcase
-                  darkMode={darkMode}
-                  projects={projects}
-                  setSelectedProject={setSelectedProject}
-                  hoveredProject={hoveredProject}
-                  setHoveredProject={setHoveredProject}
-                />
-              )}
+                {activeSection === "showcase" && (
+                  <Showcase
+                    darkMode={darkMode}
+                    projects={projects}
+                    setSelectedProject={setSelectedProject}
+                    hoveredProject={hoveredProject}
+                    setHoveredProject={setHoveredProject}
+                  />
+                )}
 
-              {activeSection === "skills" && (
-                <Skills darkMode={darkMode} skills={skills} />
-              )}
+                {activeSection === "skills" && (
+                  <Skills darkMode={darkMode} skills={skills} />
+                )}
 
-              {activeSection === "blog" && (
-                <Blog
-                  darkMode={darkMode}
-                  blogPosts={blogPosts}
-                  setSelectedPost={setSelectedPost}
-                />
-              )}
+                {activeSection === "blog" && (
+                  <Blog
+                    darkMode={darkMode}
+                    blogPosts={blogPosts}
+                    setSelectedPost={setSelectedPost}
+                  />
+                )}
 
-              {activeSection === "experience" && (
-                <Experience darkMode={darkMode} experience={experience} />
-              )}
-            </AnimatePresence>
+                {activeSection === "experience" && (
+                  <Experience darkMode={darkMode} experience={experience} />
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </main>
       </div>

@@ -1,1 +1,22 @@
 @import "tailwindcss";
+
+/* Global custom styles */
+.dev-cat {
+  width: 10rem;
+  height: 10rem;
+  object-fit: contain;
+  margin: 0 auto 0.75rem auto;
+}
+
+@media (min-width: 768px) {
+  .dev-cat {
+    width: 16rem;
+    height: 16rem;
+    margin-bottom: 1.5rem;
+    float: right;
+    margin-left: 1.5rem;
+    /* Circle only on desktop */
+    shape-outside: circle(50%);
+    clip-path: circle(50%);
+  }
+}

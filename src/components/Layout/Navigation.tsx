@@ -14,15 +14,15 @@ const Navigation = ({
   darkMode,
 }: NavigationProps) => {
   return (
-    <nav>
-      <div className="flex items-center justify-center md:gap-10  overflow-x-auto p-2">
+    <nav className="sticky top-0 z-10 backdrop-blur-sm border-b border-gray-200/20">
+      <div className="flex items-center justify-start md:justify-center gap-4 md:gap-10 overflow-x-auto px-4 md:px-2 py-3 md:py-2 scrollbar-hide">
         {sections.map((section) => (
           <button
             key={section}
             onClick={() =>
               setActiveSection(section.toLowerCase().replace(" ", ""))
             }
-            className={`relative py-2 text-sm font-medium transition-colors whitespace-nowrap ${
+            className={`relative py-2 px-1 text-xs md:text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${
               activeSection === section.toLowerCase().replace(" ", "")
                 ? darkMode
                   ? "text-white"
@@ -36,7 +36,7 @@ const Navigation = ({
             {activeSection === section.toLowerCase().replace(" ", "") && (
               <motion.div
                 layoutId="activeSection"
-                className="absolute bottom-0 left-0 right-0 h-1 bg-orange-500"
+                className="absolute bottom-0 left-0 right-0 h-0.5 md:h-1 bg-orange-500"
                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
               />
             )}
