@@ -14,12 +14,8 @@ const Navigation = ({
   darkMode,
 }: NavigationProps) => {
   return (
-    <nav
-      className={`${
-        darkMode ? "bg-[#1a1a1a]" : "bg-white"
-      } transition-colors duration-300 ease-in-out`}
-    >
-      <div className="flex items-center justify-center md:gap-10 border-b border-b-gray-200 dark:border-b-[#494949] overflow-x-auto p-2">
+    <nav>
+      <div className="flex items-center justify-center md:gap-10  overflow-x-auto p-2">
         {sections.map((section) => (
           <button
             key={section}

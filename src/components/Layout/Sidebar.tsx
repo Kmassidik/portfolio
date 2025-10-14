@@ -16,7 +16,6 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ darkMode, setDarkMode }: SidebarProps) => {
-  const bgColor = darkMode ? "bg-[#1a1a1a]" : "bg-white";
   const textColor = darkMode ? "text-white" : "text-gray-800";
   const subTextColor = darkMode ? "text-gray-400" : "text-gray-500";
   const descriptionColor = darkMode ? "text-gray-300" : "text-gray-600";
@@ -28,7 +27,7 @@ const Sidebar = ({ darkMode, setDarkMode }: SidebarProps) => {
       className={`
         md:w-80 w-full 
         min-h-screen md:h-auto 
-        ${bgColor} ${textColor} 
+        ${textColor} 
         p-8 flex flex-col items-center justify-center
         transition-colors duration-300 ease-in-out
         overflow-y-auto md:overflow-visible
@@ -38,7 +37,7 @@ const Sidebar = ({ darkMode, setDarkMode }: SidebarProps) => {
         {/* Avatar */}
         <motion.div
           whileHover={{ scale: 1.05 }}
-          className="w-36 h-36 md:w-64 md:h-64 rounded-full mb-6 overflow-hidden mx-auto md:mx-0"
+          className="w-36 h-36 md:w-52 md:h-52 rounded-full mb-6 overflow-hidden mx-auto md:mx-0"
         >
           <img
             src="https://avatars.githubusercontent.com/u/68921931?v=4"
@@ -121,7 +120,7 @@ const Sidebar = ({ darkMode, setDarkMode }: SidebarProps) => {
         </div>
       </div>
       {/* Bouncing “scroll down” text */}
-      <div className="flex items-center justify-center mt-28 md:mt-0 md:hidden">
+      <div className="flex items-center justify-center mt-10 md:mt-0 md:hidden">
         <motion.div
           animate={{ y: [0, -6, 0] }}
           transition={{
