@@ -22,14 +22,12 @@ const Showcase = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
+      className={`max-w-4xl mx-auto ${
+        darkMode ? "text-gray-200" : "text-gray-800"
+      }`}
     >
-      <h2
-        className={`text-4xl font-bold mb-8 ${
-          darkMode ? "text-gray-200" : "text-[#213555]"
-        }`}
-      >
-        Showcase
-      </h2>
+      {/* Header */}
+      <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-8">Showcase</h2>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (

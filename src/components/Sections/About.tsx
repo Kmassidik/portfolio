@@ -4,6 +4,61 @@ interface AboutProps {
   darkMode: boolean;
 }
 
+const techStack = [
+  {
+    name: "JavaScript",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+  },
+  {
+    name: "TypeScript",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+  },
+  {
+    name: "Node.js",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+  },
+  {
+    name: "React",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+  },
+  {
+    name: "Vue.js",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg",
+  },
+  {
+    name: "Svelte",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg",
+  },
+  {
+    name: "Go",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg",
+  },
+  {
+    name: "Python",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+  },
+  {
+    name: "PostgreSQL",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+  },
+  {
+    name: "MongoDB",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+  },
+  {
+    name: "Redis",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
+  },
+  {
+    name: "Docker",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+  },
+  {
+    name: "Kubernetes",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg",
+  },
+];
+
 const About = ({ darkMode }: AboutProps) => {
   return (
     <motion.div
@@ -54,23 +109,39 @@ const About = ({ darkMode }: AboutProps) => {
         </p>
       </div>
 
-      {/* Tech Stack Mention */}
       <div
         className={`${
-          darkMode ? "bg-gray-800/20" : "bg-gray-50"
+          darkMode ? "bg-gray-800/20" : "bg-white"
         } rounded-lg p-4 md:p-6 border ${
           darkMode ? "border-gray-700/50" : "border-gray-200/50"
         }`}
       >
         <p
-          className={`text-xs md:text-sm ${
+          className={`text-xs md:text-sm mb-4 ${
             darkMode ? "text-gray-400" : "text-gray-600"
           }`}
         >
-          <strong>Current Tech Stack:</strong> JavaScript/TypeScript, Node.js,
-          React, Vue.js, Svelte, Go, Python, PostgreSQL, MongoDB, Redis, Docker,
-          Kubernetes, and more. Always learning, always building.
+          <strong>Current Tech Stack</strong>
         </p>
+
+        <div className="grid grid-cols-5 sm:grid-cols-7 md:grid-cols-9 gap-4 place-items-center">
+          {techStack.map(({ name, logo }) => (
+            <motion.div
+              key={name}
+              whileHover={{ scale: 1.2, rotate: 5 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              title={name}
+              className="flex flex-col items-center gap-1 text-center"
+            >
+              <img
+                src={logo}
+                alt={name}
+                className="w-8 h-8 md:w-10 md:h-10 object-contain"
+              />
+              <span className="text-[10px] md:text-xs opacity-70">{name}</span>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </motion.div>
   );
