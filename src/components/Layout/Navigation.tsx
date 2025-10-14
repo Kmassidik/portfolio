@@ -6,7 +6,7 @@ interface NavigationProps {
   darkMode: boolean;
 }
 
-const sections = ["About Me", "Showcase", "Skills", "Blog", "Experience"];
+const sections = ["About Me", "Showcase", "Blog"];
 
 const Navigation = ({
   activeSection,
@@ -14,7 +14,7 @@ const Navigation = ({
   darkMode,
 }: NavigationProps) => {
   return (
-    <nav className="sticky top-0 z-10 backdrop-blur-sm border-b border-gray-200/20">
+    <nav className="backdrop-blur-sm mt-10">
       <div className="flex items-center justify-start md:justify-center gap-4 md:gap-10 overflow-x-auto px-4 md:px-2 py-3 md:py-2 scrollbar-hide">
         {sections.map((section) => (
           <button

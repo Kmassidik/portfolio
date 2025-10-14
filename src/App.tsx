@@ -3,14 +3,8 @@ import { AnimatePresence } from "framer-motion";
 import { useDarkMode } from "./hooks/useDarkMode";
 import { Sidebar, Navigation } from "./components/Layout";
 import { ProjectModal, BlogModal } from "./components/Modals";
-import {
-  About,
-  Showcase,
-  Skills,
-  Blog,
-  Experience,
-} from "./components/Sections";
-import { projects, blogPosts, skills, experience } from "./data";
+import { About, Showcase, Blog } from "./components/Sections";
+import { projects, blogPosts } from "./data";
 import type { Project, BlogPost } from "./types";
 
 function App() {
@@ -26,10 +20,10 @@ function App() {
         darkMode ? "bg-[#1a1a1a]" : "bg-white"
       } transition-colors duration-300`}
     >
-      <div className="flex flex-col md:flex-row min-h-screen md:container md:mx-auto">
+      <div className="flex flex-col md:flex-row md:container md:mx-auto">
         <Sidebar darkMode={darkMode} setDarkMode={setDarkMode} />
 
-        <main className="flex-1 flex flex-col md:h-screen md:my-10 overflow-hidden">
+        <main className="flex-1 flex flex-col md:h-screen overflow-hidden">
           <Navigation
             activeSection={activeSection}
             setActiveSection={setActiveSection}
@@ -83,20 +77,12 @@ function App() {
                   />
                 )}
 
-                {activeSection === "skills" && (
-                  <Skills darkMode={darkMode} skills={skills} />
-                )}
-
                 {activeSection === "blog" && (
                   <Blog
                     darkMode={darkMode}
                     blogPosts={blogPosts}
                     setSelectedPost={setSelectedPost}
                   />
-                )}
-
-                {activeSection === "experience" && (
-                  <Experience darkMode={darkMode} experience={experience} />
                 )}
               </AnimatePresence>
             </div>

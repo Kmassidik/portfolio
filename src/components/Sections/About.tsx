@@ -52,23 +52,6 @@ const About = ({ darkMode }: AboutProps) => {
           Currently, I'm working as a freelance Software Engineer, owning
           end-to-end development from concept to deployment.
         </p>
-
-        <h3 className="text-lg md:text-2xl font-semibold mb-2 md:mb-4 mt-4 md:mt-8">
-          Background
-        </h3>
-
-        <p className="text-xs md:text-lg leading-relaxed mb-2 md:mb-4">
-          I hold a Bachelor's degree in Electrical Engineering from Telkom
-          University and completed intensive Full Stack JavaScript bootcamps at
-          both Binar Academy and Hacktive8.
-        </p>
-
-        <p className="text-xs md:text-lg leading-relaxed">
-          This unique blend of electrical engineering fundamentals, hands-on
-          technical operations, and modern software development gives me a
-          holistic perspective on building reliable, efficient systems that
-          actually work in production.
-        </p>
       </div>
 
       {/* Tech Stack Mention */}
