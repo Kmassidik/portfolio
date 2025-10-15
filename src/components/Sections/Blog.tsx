@@ -10,65 +10,31 @@ interface BlogProps {
 const Blog = ({ darkMode, blogPosts, setSelectedPost }: BlogProps) => {
   return (
     <motion.div
-      key="blog"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      className={`max-w-4xl mx-auto ${
+      className={`max-w-3xl mx-auto p-4 ${
         darkMode ? "text-gray-200" : "text-gray-800"
       }`}
     >
-      {/* Header */}
-      <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-8">Showcase</h2>
-
-      <div className="grid md:grid-cols-2 gap-6">
-        {blogPosts.map((post) => (
-          <motion.div
-            key={post.id}
-            whileHover={{ scale: 1.02 }}
-            onClick={() => setSelectedPost(post)}
-            className={`${
-              darkMode ? "bg-gray-800" : "bg-white"
-            } rounded-2xl shadow-md p-6 cursor-pointer`}
+      {blogPosts.map((post) => (
+        <motion.div
+          key={post.id}
+          onClick={() => setSelectedPost(post)}
+          className="cursor-pointer mb-6 "
+        >
+          <div className="flex justify-between items-baseline pb-2">
+            <span className="text-2xl font-bold">{post.year}</span>
+          </div>
+          <h3
+            className={`text-lg mt-2 hover:text-2xl${
+              darkMode ? "text-gray-100" : "text-gray-900"
+            }`}
           >
-            <div className="flex justify-between items-start mb-3">
-              <h3
-                className={`text-xl font-bold ${
-                  darkMode ? "text-gray-200" : "text-[#213555]"
-                }`}
-              >
-                {post.title}
-              </h3>
-              <span
-                className={`text-sm ${
-                  darkMode ? "text-gray-400" : "text-gray-600"
-                }`}
-              >
-                {post.date}
-              </span>
-            </div>
-            <p
-              className={`mb-4 ${darkMode ? "text-gray-300" : "text-gray-700"}`}
-            >
-              {post.snippet}
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className={`text-xs px-2 py-1 rounded ${
-                    darkMode
-                      ? "bg-gray-700 text-gray-300"
-                      : "bg-[#D8C4B6] text-[#213555]"
-                  }`}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        ))}
-      </div>
+            <span className="flex justify-between border-b-2 border-b-orange-500 pb-2">
+              {post.title}
+              <span className="text-sm text-gray-500">{post.date}</span>
+            </span>
+          </h3>
+        </motion.div>
+      ))}
     </motion.div>
   );
 };

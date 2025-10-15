@@ -11,6 +11,7 @@ export interface Project {
 export interface BlogPost {
   id: string;
   title: string;
+  year: string;
   snippet: string;
   content: string;
   tags: string[];
