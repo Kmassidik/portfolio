@@ -12,7 +12,6 @@ function App() {
   const [activeSection, setActiveSection] = useState("aboutme");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
-  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
   return (
     <div
@@ -72,8 +71,6 @@ function App() {
                     darkMode={darkMode}
                     projects={projects}
                     setSelectedProject={setSelectedProject}
-                    hoveredProject={hoveredProject}
-                    setHoveredProject={setHoveredProject}
                   />
                 )}
 

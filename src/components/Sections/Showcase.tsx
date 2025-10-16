@@ -1,85 +1,83 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useMemo } from "react";
+import { motion } from "framer-motion";
 import type { Project } from "../../types";
 
 interface ShowcaseProps {
   darkMode: boolean;
   projects: Project[];
-  setSelectedProject: (project: Project | null) => void;
-  hoveredProject: string | null;
-  setHoveredProject: (id: string | null) => void;
+  setSelectedProject: (project: Project) => void;
 }
 
 const Showcase = ({
   darkMode,
   projects,
   setSelectedProject,
-  hoveredProject,
-  setHoveredProject,
 }: ShowcaseProps) => {
+  const [search, setSearch] = useState("");
+
+  const filteredProjects = useMemo(
+    () =>
+      projects.filter((p) =>
+        p.name.toLowerCase().includes(search.toLowerCase())
+      ),
+    [search, projects]
+  );
+
   return (
     <motion.div
       key="showcase"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className={`max-w-4xl mx-auto ${
+      className={`max-w-6xl mx-auto px-4 ${
         darkMode ? "text-gray-200" : "text-gray-800"
       }`}
     >
-      {/* Header */}
-      <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-8">Showcase</h2>
+      <h2 className="text-3xl md:text-5xl font-bold mb-6">Showcase</h2>
 
+      {/* Search */}
+      <div className="mb-6">
+        <input
+          type="text"
+          placeholder="Search projects..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className={`w-full md:w-1/2 px-4 py-2 rounded-lg border ${
+            darkMode
+              ? "border-gray-600 bg-gray-800 text-gray-200 placeholder-gray-400"
+              : "border-gray-300 bg-white text-gray-800 placeholder-gray-500"
+          }`}
+        />
+      </div>
+
+      {/* Project Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
+        {filteredProjects.map((project) => (
           <motion.div
             key={project.id}
-            className="relative"
-            onHoverStart={() => setHoveredProject(project.id)}
-            onHoverEnd={() => setHoveredProject(null)}
+            whileHover={{ scale: 1.03 }}
+            onClick={() => setSelectedProject(project)}
+            className={`rounded-2xl shadow-md p-6 cursor-pointer h-40 flex flex-col justify-between ${
+              darkMode ? "bg-gray-800" : "bg-white"
+            }`}
           >
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              onClick={() => setSelectedProject(project)}
-              className={`${
-                darkMode ? "bg-gray-800" : "bg-white"
-              } rounded-2xl shadow-md p-6 cursor-pointer h-32 flex items-center justify-center text-center`}
+            <h3
+              className={`text-xl font-bold ${
+                darkMode ? "text-gray-200" : "text-gray-900"
+              }`}
             >
-              <h3
-                className={`text-xl font-bold ${
-                  darkMode ? "text-gray-200" : "text-[#213555]"
-                }`}
-              >
-                {project.name}
-              </h3>
-            </motion.div>
-
-            <AnimatePresence>
-              {hoveredProject === project.id && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  className={`absolute inset-0 ${
-                    darkMode ? "bg-gray-700" : "bg-[#213555]"
-                  } text-white rounded-2xl shadow-lg p-6 z-10`}
+              {project.name}
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {project.tech.map((tech) => (
+                <span
+                  key={tech}
+                  className="text-xs bg-blue-500/20 px-2 py-1 rounded"
                 >
-                  <h3 className="text-lg font-bold mb-2">{project.name}</h3>
-                  <p className="text-sm mb-3 text-gray-300">
-                    {project.description.slice(0, 100)}...
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.slice(0, 3).map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-xs bg-white/20 px-2 py-1 rounded"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  {tech}
+                </span>
+              ))}
+            </div>
           </motion.div>
         ))}
       </div>
