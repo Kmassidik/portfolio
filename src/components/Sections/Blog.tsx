@@ -10,7 +10,11 @@ interface BlogProps {
 const Blog = ({ darkMode, blogPosts, setSelectedPost }: BlogProps) => {
   return (
     <motion.div
-      className={`max-w-3xl mx-auto p-4 ${
+      key="about"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      className={`max-w-4xl mx-auto ${
         darkMode ? "text-gray-200" : "text-gray-800"
       }`}
     >
@@ -28,9 +32,19 @@ const Blog = ({ darkMode, blogPosts, setSelectedPost }: BlogProps) => {
               darkMode ? "text-gray-100" : "text-gray-900"
             }`}
           >
-            <span className="flex justify-between border-b-2 border-b-orange-500 pb-2">
+            <span
+              className={`flex justify-between border-b-4 ${
+                darkMode ? "border-b-orange-500" : "border-b-slate-300"
+              }  pb-2`}
+            >
               {post.title}
-              <span className="text-sm text-gray-500">{post.date}</span>
+              <span
+                className={`text-sm ${
+                  darkMode ? "text-slate-300" : "text-slate-500"
+                }`}
+              >
+                {post.date}
+              </span>
             </span>
           </h3>
         </motion.div>

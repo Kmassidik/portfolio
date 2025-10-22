@@ -25,11 +25,11 @@ const Showcase = ({
 
   return (
     <motion.div
-      key="showcase"
+      key="about"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className={`max-w-6xl mx-auto px-4 ${
+      className={`max-w-4xl mx-auto ${
         darkMode ? "text-gray-200" : "text-gray-800"
       }`}
     >
