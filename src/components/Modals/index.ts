@@ -1,2 +1,2 @@
-export { default as ProjectModal } from "./ProjectModal";
+export { default as ShowCaseModal } from "./ShowCaseModal";
 export { default as BlogModal } from "./BlogModal";

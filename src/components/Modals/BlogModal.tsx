@@ -61,21 +61,6 @@ const BlogModal = ({
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-2 mb-6">
-          {selectedPost.tags.map((tag) => (
-            <span
-              key={tag}
-              className={`text-xs px-2 py-1 rounded ${
-                darkMode
-                  ? "bg-gray-700 text-gray-300"
-                  : "bg-[#D8C4B6] text-[#213555]"
-              }`}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
         <div
           className={`prose prose-lg ${
             darkMode ? "prose-invert" : ""

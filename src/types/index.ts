@@ -14,7 +14,6 @@ export interface BlogPost {
   year: string;
   snippet: string;
   content: string;
-  tags: string[];
   date: string;
 }
 

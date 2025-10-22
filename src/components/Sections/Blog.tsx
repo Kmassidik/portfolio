@@ -22,29 +22,33 @@ const Blog = ({ darkMode, blogPosts, setSelectedPost }: BlogProps) => {
         <motion.div
           key={post.id}
           onClick={() => setSelectedPost(post)}
-          className="cursor-pointer mb-6 "
+          className="cursor-pointer mb-6 group"
         >
           <div className="flex justify-between items-baseline pb-2">
             <span className="text-2xl font-bold">{post.year}</span>
           </div>
           <h3
-            className={`text-lg mt-2 hover:text-2xl${
+            className={`text-lg mt-2 transition-all duration-300  ${
               darkMode ? "text-gray-100" : "text-gray-900"
             }`}
           >
-            <span
-              className={`flex justify-between border-b-4 ${
-                darkMode ? "border-b-orange-500" : "border-b-slate-300"
-              }  pb-2`}
-            >
-              {post.title}
+            <span className="flex justify-between pb-2 relative">
+              {/* Content */}
+              <span className="relative z-10">{post.title}</span>
               <span
-                className={`text-sm ${
+                className={`text-sm relative z-10 ${
                   darkMode ? "text-slate-300" : "text-slate-500"
                 }`}
               >
                 {post.date}
               </span>
+
+              {/* Animated border bottom */}
+              <span
+                className={`absolute bottom-0 left-0 w-full h-1 ${
+                  darkMode ? "bg-orange-500" : "bg-slate-300"
+                } transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`}
+              />
             </span>
           </h3>
         </motion.div>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { useDarkMode } from "./hooks/useDarkMode";
 import { Sidebar, Navigation } from "./components/Layout";
-import { ProjectModal, BlogModal } from "./components/Modals";
+import { ShowCaseModal, BlogModal } from "./components/Modals";
 import { About, Showcase, Blog } from "./components/Sections";
 import { projects, blogPosts } from "./data";
 import type { Project, BlogPost } from "./types";
@@ -31,38 +31,6 @@ function App() {
 
           <div className="flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar">
             <div className="p-4 md:p-8 pb-8 md:pb-12">
-              <style>{`
-                .custom-scrollbar::-webkit-scrollbar {
-                  width: 8px;
-                }
-                .custom-scrollbar::-webkit-scrollbar-track {
-                  background: transparent;
-                }
-                .custom-scrollbar::-webkit-scrollbar-thumb {
-                  background: ${
-                    darkMode
-                      ? "rgba(156, 163, 175, 0.3)"
-                      : "rgba(203, 213, 225, 0.5)"
-                  };
-                  border-radius: 4px;
-                }
-                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-                  background: ${
-                    darkMode
-                      ? "rgba(156, 163, 175, 0.5)"
-                      : "rgba(203, 213, 225, 0.8)"
-                  };
-                }
-                /* For Firefox */
-                .custom-scrollbar {
-                  scrollbar-width: thin;
-                  scrollbar-color: ${
-                    darkMode
-                      ? "rgba(156, 163, 175, 0.3)"
-                      : "rgba(203, 213, 225, 0.5)"
-                  } transparent;
-                }
-              `}</style>
               <AnimatePresence mode="wait">
                 {activeSection === "aboutme" && <About darkMode={darkMode} />}
 
@@ -89,7 +57,7 @@ function App() {
 
       <AnimatePresence>
         {selectedProject && (
-          <ProjectModal
+          <ShowCaseModal
             selectedProject={selectedProject}
             setSelectedProject={setSelectedProject}
             darkMode={darkMode}

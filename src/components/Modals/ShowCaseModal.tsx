@@ -1,17 +1,17 @@
 import { motion, AnimatePresence } from "framer-motion";
 import type { Project } from "../../types";
 
-interface ProjectModalProps {
+interface ShowCaseProps {
   selectedProject: Project;
   setSelectedProject: (project: Project | null) => void;
   darkMode: boolean;
 }
 
-const ProjectModal = ({
+const ShowCaseModal = ({
   selectedProject,
   setSelectedProject,
   darkMode,
-}: ProjectModalProps) => {
+}: ShowCaseProps) => {
   if (!selectedProject) return null;
 
   // Enhanced markdown parser with better handling
@@ -216,7 +216,7 @@ const ProjectModal = ({
                 href={selectedProject.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-2.5 rounded-lg bg-blue-500 text-white font-medium hover:bg-blue-600 transition-all shadow-md hover:shadow-lg"
+                className="px-6 py-2.5 rounded-lg text-dark font-medium hover:bg-slate-100 transition-all shadow-md hover:shadow-lg"
               >
                 Live Demo
               </a>
@@ -349,4 +349,4 @@ const ProjectModal = ({
   );
 };
 
-export default ProjectModal;
+export default ShowCaseModal;
