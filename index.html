@@ -1,11 +1,146 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>porto</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+
+    <!-- Basic SEO -->
+    <title>Kmassidik | Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio of Kurnia Massidik — Software Engineer & Application Architect based in Jakarta, Indonesia. Explore AI projects, full-stack apps, IoT systems, and more."
+    />
+    <meta
+      name="keywords"
+      content="Kurnia Massidik, Software Engineer, Portfolio, Web Developer, Full Stack, React, Next.js, Golang, Python, Supabase, AI, Cloud, IoT, Indonesia"
+    />
+    <meta name="author" content="Kurnia Massidik" />
+    <link rel="canonical" href="https://kurniatech.my.id" />
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta
+      property="og:title"
+      content="KurniaTech — Software Engineer Portfolio"
+    />
+    <meta
+      property="og:description"
+      content="Discover the projects and technical blog of Kurnia Massidik — from AI platforms to IoT dashboards and full-stack systems."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kurniatech.my.id" />
+    <meta property="og:image" content="https://kurniatech.my.id/og-image.jpg" />
+    <meta property="og:site_name" content="KurniaTech" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="KurniaTech — Software Engineer Portfolio"
+    />
+    <meta
+      name="twitter:description"
+      content="Explore full-stack, AI, and IoT projects by Kurnia Massidik. Built with React, Next.js, Go, Python, and more."
+    />
+    <meta
+      name="twitter:image"
+      content="https://kurniatech.my.id/og-image.jpg"
+    />
+    <meta name="twitter:creator" content="@kurniatech" />
+
+    <!-- Structured Data (JSON-LD for SEO) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Kurnia Massidik",
+        "url": "https://kurniatech.my.id",
+        "jobTitle": "Software Engineer",
+        "description": "Software Engineer & Application Architect based in Jakarta, Indonesia.",
+        "sameAs": [
+          "https://github.com",
+          "https://linkedin.com",
+          "https://twitter.com"
+        ],
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Freelance / Independent Projects"
+        },
+        "knowsAbout": [
+          "Software Architecture",
+          "Cloud Computing",
+          "AI",
+          "Frontend Development",
+          "Backend Development",
+          "IoT"
+        ]
+      }
+    </script>
+
+    <!-- Structured Data for Blog -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "headline": "From Electrical Engineering to Software Architecture",
+        "description": "My journey transitioning from circuit boards to cloud architectures.",
+        "author": {
+          "@type": "Person",
+          "name": "Kurnia Massidik"
+        },
+        "datePublished": "2024-03-15",
+        "publisher": {
+          "@type": "Organization",
+          "name": "KurniaTech"
+        }
+      }
+    </script>
+
+    <!-- Structured Data for Projects -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Highlighted Projects",
+        "itemListElement": [
+          {
+            "@type": "CreativeWork",
+            "position": 1,
+            "name": "Social Ai",
+            "description": "AI-driven multimedia content platform with image generation, TTS, and lip-sync built using Next.js, Python, and Supabase."
+          },
+          {
+            "@type": "CreativeWork",
+            "position": 2,
+            "name": "Bus Track Command",
+            "description": "TransJakarta proof-of-concept for bus automation using Golang, MQTT, and Raspberry Pi."
+          },
+          {
+            "@type": "CreativeWork",
+            "position": 3,
+            "name": "Dalang.io",
+            "description": "Landing and product pages built with Svelte, Supabase, and Xendit payments."
+          }
+        ]
+      }
+    </script>
+
+    <!-- Robots -->
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large"
+    />
+
+    <!-- Theme color -->
+    <meta name="theme-color" content="#0f172a" />
+
+    <!-- Preload fonts or critical assets if needed -->
+    <!-- <link rel="preload" as="image" href="/og-image.jpg" /> -->
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

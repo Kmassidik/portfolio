@@ -36,7 +36,7 @@ const Navigation = ({
             {activeSection === section.toLowerCase().replace(" ", "") && (
               <motion.div
                 layoutId="activeSection"
-                className="absolute bottom-0 left-0 right-0 h-0.5 md:h-1 bg-orange-500"
+                className="absolute bottom-0 left-0 right-0 h-0.5 md:h-1 bg-[#C15F3C]"
                 transition={{ type: "spring", stiffness: 380, damping: 30 }}
               />
             )}
