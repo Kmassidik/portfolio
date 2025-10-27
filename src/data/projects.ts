@@ -34,7 +34,7 @@ This project showcases expertise in AI-driven platforms, integrating cutting-edg
     description: `
 ![Bus Track Command](https://picsum.photos/seed/bus-track/600/300)
 
-Developed a **proof-of-concept system** for TransJakarta to automate bus announcements, including a React + Zustand dashboard, Golang + PostgreSQL backend, and Raspberry Pi MQTT client. Integrated ElevenLabs voice generation and deployed services with Docker to ensure scalable, reliable operation.
+Developed a **proof-of-concept system** to automate bus announcements, including a React + Zustand dashboard, Golang + PostgreSQL backend, and Raspberry Pi MQTT client. Integrated ElevenLabs voice generation and deployed services with Docker to ensure scalable, reliable operation.
 
 ## Features:
 - Automated announcements via voice generation
