@@ -16,7 +16,7 @@ function App() {
   return (
     <div
       className={`min-h-screen ${
-        darkMode ? "bg-[#1a1a1a]" : "bg-white"
+        darkMode ? "bg-[#262624]" : "bg-white"
       } transition-colors duration-300`}
     >
       <div className="flex flex-col md:flex-row md:container md:mx-auto">

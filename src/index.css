@@ -34,10 +34,10 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #f97316;
+  background-color: #c15f3c;
   border-radius: 4px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #fb923c; /* Slightly lighter orange for hover */
+  background-color: #c15f3c; /* Slightly lighter orange for hover */
 }

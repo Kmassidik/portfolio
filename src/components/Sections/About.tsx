@@ -66,7 +66,7 @@ const About = ({ darkMode }: AboutProps) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className={`max-w-4xl mx-auto ${
+      className={`max-w-5xl mx-auto ${
         darkMode ? "text-gray-200" : "text-gray-800"
       }`}
     >
@@ -76,8 +76,8 @@ const About = ({ darkMode }: AboutProps) => {
       {/* Main Content with floating cat */}
       <div
         className={`${
-          darkMode ? "bg-gray-800/30" : "bg-white/50"
-        } rounded-lg p-3 md:p-8 mb-4 md:mb-8 border ${
+          darkMode ? "bg-[#1e1e1d]" : "bg-white/50"
+        } rounded-lg p-5 md:p-8 mb-4 md:mb-8 border ${
           darkMode ? "border-gray-700/50" : "border-gray-200/50"
         }`}
       >
@@ -111,7 +111,7 @@ const About = ({ darkMode }: AboutProps) => {
 
       <div
         className={`${
-          darkMode ? "bg-gray-800/20" : "bg-white"
+          darkMode ? "bg-[#1e1e1d]" : "bg-white"
         } rounded-lg p-4 md:p-6 border ${
           darkMode ? "border-gray-700/50" : "border-gray-200/50"
         }`}

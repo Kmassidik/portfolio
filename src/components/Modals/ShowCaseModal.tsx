@@ -14,33 +14,29 @@ const ShowCaseModal = ({
 }: ShowCaseProps) => {
   if (!selectedProject) return null;
 
-  // Enhanced markdown parser with better handling
   const parseMarkdown = (text: string): string => {
     let html = text.trim();
 
-    // Images: ![alt](url) - process first to avoid conflicts
+    // Images
     html = html.replace(
       /!\[([^\]]*)\]\(([^)]+)\)/g,
       '<img src="$2" alt="$1" class="markdown-img" />'
     );
 
-    // Links: [text](url)
+    // Links
     html = html.replace(
       /\[([^\]]+)\]\(([^)]+)\)/g,
       '<a href="$2" target="_blank" rel="noopener noreferrer" class="markdown-link">$1</a>'
     );
 
-    // Split into lines for processing
     const lines = html.split("\n");
     const processed: string[] = [];
     let inList = false;
     let listItems: string[] = [];
 
-    for (let i = 0; i < lines.length; i++) {
-      let line = lines[i];
+    for (let line of lines) {
       const trimmed = line.trim();
 
-      // Skip empty lines but close lists if needed
       if (!trimmed) {
         if (inList) {
           processed.push(`<ul class="markdown-ul">${listItems.join("")}</ul>`);
@@ -51,36 +47,36 @@ const ShowCaseModal = ({
         continue;
       }
 
-      // Headers
       if (trimmed.startsWith("### ")) {
         if (inList) {
           processed.push(`<ul class="markdown-ul">${listItems.join("")}</ul>`);
-          listItems = [];
           inList = false;
+          listItems = [];
         }
         processed.push(`<h3 class="markdown-h3">${trimmed.substring(4)}</h3>`);
         continue;
       }
+
       if (trimmed.startsWith("## ")) {
         if (inList) {
           processed.push(`<ul class="markdown-ul">${listItems.join("")}</ul>`);
-          listItems = [];
           inList = false;
+          listItems = [];
         }
         processed.push(`<h2 class="markdown-h2">${trimmed.substring(3)}</h2>`);
         continue;
       }
+
       if (trimmed.startsWith("# ")) {
         if (inList) {
           processed.push(`<ul class="markdown-ul">${listItems.join("")}</ul>`);
-          listItems = [];
           inList = false;
+          listItems = [];
         }
         processed.push(`<h1 class="markdown-h1">${trimmed.substring(2)}</h1>`);
         continue;
       }
 
-      // List items
       if (trimmed.match(/^[-*]\s+/)) {
         const content = trimmed.substring(2);
         listItems.push(`<li class="markdown-li">${content}</li>`);
@@ -88,46 +84,33 @@ const ShowCaseModal = ({
         continue;
       }
 
-      // Close list if we're in one and hit non-list content
       if (inList) {
         processed.push(`<ul class="markdown-ul">${listItems.join("")}</ul>`);
-        listItems = [];
         inList = false;
+        listItems = [];
       }
 
-      // Images (already converted)
       if (trimmed.startsWith("<img")) {
         processed.push(trimmed);
         continue;
       }
 
-      // Regular paragraph
-      if (trimmed) {
-        processed.push(`<p class="markdown-p">${trimmed}</p>`);
-      }
+      if (trimmed) processed.push(`<p class="markdown-p">${trimmed}</p>`);
     }
 
-    // Close any remaining list
-    if (inList) {
+    if (inList)
       processed.push(`<ul class="markdown-ul">${listItems.join("")}</ul>`);
-    }
 
     html = processed.join("\n");
 
-    // Inline formatting (after block-level processing)
-    // Bold: **text**
     html = html.replace(
       /\*\*([^*]+)\*\*/g,
       '<strong class="markdown-bold">$1</strong>'
     );
-
-    // Italic: *text* (but not in middle of words or list markers)
     html = html.replace(
       /(?<!\w)\*([^*]+)\*(?!\w)/g,
       '<em class="markdown-italic">$1</em>'
     );
-
-    // Inline code: `code`
     html = html.replace(/`([^`]+)`/g, '<code class="markdown-code">$1</code>');
 
     return html;
@@ -136,11 +119,9 @@ const ShowCaseModal = ({
   const descriptionHTML = parseMarkdown(selectedProject.description);
 
   const styles = {
-    linkColor: darkMode ? "#60A5FA" : "#2563EB",
-    linkHover: darkMode ? "#93C5FD" : "#1D4ED8",
-    codeBg: darkMode ? "#1F2937" : "#F3F4F6",
-    codeBorder: darkMode ? "#374151" : "#D1D5DB",
-    codeText: darkMode ? "#E5E7EB" : "#374151",
+    codeBg: darkMode ? "#1e1e1d" : "#F9FAFB",
+    codeBorder: darkMode ? "#3F3F46" : "#E5E7EB",
+    codeText: darkMode ? "#E5E7EB" : "#1F2937",
     listMarker: darkMode ? "#9CA3AF" : "#6B7280",
   };
 
@@ -159,15 +140,21 @@ const ShowCaseModal = ({
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
           transition={{ type: "spring", duration: 0.5 }}
           onClick={(e) => e.stopPropagation()}
-          className={`rounded-2xl p-8 max-w-4xl w-full overflow-y-auto max-h-[90vh] shadow-2xl ${
-            darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-900"
+          className={`rounded-2xl p-8 max-w-4xl w-full overflow-y-auto custom-scrollbar max-h-[90vh] shadow-2xl border ${
+            darkMode
+              ? "bg-[#1e1e1d] text-gray-200 border-gray-700/50"
+              : "bg-white text-gray-800 border-gray-200/50"
           }`}
         >
           {/* Header */}
-          <div className="flex justify-between items-start mb-6 pb-4 border-b border-gray-700/50">
+          <div
+            className={`flex justify-between items-start mb-6 pb-4 border-b ${
+              darkMode ? "border-gray-700/50" : "border-gray-200/50"
+            }`}
+          >
             <h2
               className={`text-3xl font-bold ${
-                darkMode ? "text-white" : "text-gray-900"
+                darkMode ? "text-gray-100" : "text-gray-900"
               }`}
             >
               {selectedProject.name}
@@ -176,7 +163,7 @@ const ShowCaseModal = ({
               onClick={() => setSelectedProject(null)}
               className={`text-2xl w-8 h-8 flex items-center justify-center rounded-lg transition-all ${
                 darkMode
-                  ? "text-gray-400 hover:text-gray-200 hover:bg-gray-700"
+                  ? "text-gray-400 hover:text-gray-200 hover:bg-gray-800"
                   : "text-gray-500 hover:text-gray-700 hover:bg-gray-100"
               }`}
               aria-label="Close modal"
@@ -199,8 +186,8 @@ const ShowCaseModal = ({
                   key={tech}
                   className={`text-sm font-medium px-3 py-1.5 rounded-md transition-all ${
                     darkMode
-                      ? "bg-blue-500/20 text-blue-300 border border-blue-500/30 hover:bg-blue-500/30"
-                      : "bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100"
+                      ? "bg-white/5 text-gray-200 border border-gray-700 hover:bg-white/10"
+                      : "bg-gray-50 text-gray-800 border border-gray-200 hover:bg-gray-100"
                   }`}
                 >
                   {tech}
@@ -216,7 +203,11 @@ const ShowCaseModal = ({
                 href={selectedProject.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-2.5 rounded-lg text-dark font-medium hover:bg-slate-100 transition-all shadow-md hover:shadow-lg"
+                className={`px-6 py-2.5 rounded-lg font-medium transition-all shadow-md hover:shadow-lg ${
+                  darkMode
+                    ? "bg-white/10 text-gray-200 hover:bg-white/20 border border-gray-700/50"
+                    : "bg-white text-gray-800 hover:bg-gray-100 border border-gray-200/50"
+                }`}
               >
                 Live Demo
               </a>
@@ -228,7 +219,7 @@ const ShowCaseModal = ({
                 rel="noopener noreferrer"
                 className={`px-6 py-2.5 rounded-lg font-medium transition-all shadow-md hover:shadow-lg ${
                   darkMode
-                    ? "bg-gray-700 text-white hover:bg-gray-600 border border-gray-600"
+                    ? "bg-[#1e1e1d] text-gray-200 border border-gray-700 hover:bg-gray-800"
                     : "bg-gray-900 text-white hover:bg-gray-800"
                 }`}
               >
@@ -237,90 +228,69 @@ const ShowCaseModal = ({
             )}
           </div>
 
-          {/* Enhanced styles for markdown elements */}
+          {/* Markdown Style Overrides */}
           <style>{`
             .markdown-content {
               line-height: 1.8;
               font-size: 0.9375rem;
             }
-            
             .markdown-img {
               border-radius: 0.75rem;
               width: 100%;
               margin: 1.5rem 0;
               object-fit: cover;
               max-height: 350px;
-              box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+              box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                          0 2px 4px -1px rgba(0, 0, 0, 0.06);
             }
-            
             .markdown-link {
-              color: ${styles.linkColor};
+              color: #c15f3c;
+              border-bottom: 1px solid #c15f3c;
               text-decoration: none;
-              border-bottom: 1px solid ${styles.linkColor};
               transition: all 0.2s;
               font-weight: 500;
             }
             .markdown-link:hover {
-              color: ${styles.linkHover};
-              border-bottom-color: ${styles.linkHover};
+              color: #c1603cc4;
+              border-bottom-color: #c1603cc4;
             }
-            
             .markdown-h1 {
               font-size: 2rem;
               font-weight: 700;
               margin: 1.75rem 0 1rem 0;
-              line-height: 1.2;
             }
-            
             .markdown-h2 {
               font-size: 1.5rem;
               font-weight: 600;
               margin: 1.5rem 0 0.875rem 0;
-              line-height: 1.3;
-              padding-bottom: 0.375rem;
-              border-bottom: 1px solid ${darkMode ? "#374151" : "#E5E7EB"};
+              border-bottom: 1px solid ${darkMode ? "#3F3F46" : "#E5E7EB"};
             }
-            
             .markdown-h3 {
               font-size: 1.25rem;
               font-weight: 600;
               margin: 1.25rem 0 0.625rem 0;
-              line-height: 1.4;
             }
-            
             .markdown-bold {
-              font-weight: 600;
               color: ${darkMode ? "#F9FAFB" : "#111827"};
             }
-            
-            .markdown-italic {
-              font-style: italic;
-            }
-            
             .markdown-code {
               background-color: ${styles.codeBg};
-              color: ${styles.codeText};
               border: 1px solid ${styles.codeBorder};
+              color: ${styles.codeText};
               padding: 0.2rem 0.5rem;
               border-radius: 0.375rem;
-              font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-              font-size: 0.875em;
-              font-weight: 400;
+              font-family: 'Monaco', 'Menlo', monospace;
             }
-            
             .markdown-ul {
               margin: 1rem 0;
-              padding-left: 0;
               list-style: none;
+              padding-left: 0;
             }
-            
             .markdown-li {
               margin: 0.625rem 0;
               padding-left: 1.75rem;
               position: relative;
-              line-height: 1.7;
             }
-            
             .markdown-li:before {
               content: "•";
               position: absolute;
@@ -328,19 +298,6 @@ const ShowCaseModal = ({
               color: ${styles.listMarker};
               font-weight: bold;
               font-size: 1.25em;
-            }
-            
-            .markdown-p {
-              margin: 0.875rem 0;
-              line-height: 1.8;
-            }
-            
-            .markdown-p:first-child {
-              margin-top: 0;
-            }
-            
-            .markdown-p:last-child {
-              margin-bottom: 0;
             }
           `}</style>
         </motion.div>

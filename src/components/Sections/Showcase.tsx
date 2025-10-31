@@ -43,7 +43,7 @@ const Showcase = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className={`max-w-6xl mx-auto ${
+      className={`max-w-8xl mx-auto ${
         darkMode ? "text-gray-200" : "text-gray-800"
       }`}
     >
@@ -55,7 +55,7 @@ const Showcase = ({
 
         <div className="flex items-center gap-3">
           <p
-            className={`text-base md:text-lg ${
+            className={`text-xs  md:text-lg ${
               darkMode ? "text-gray-400" : "text-gray-600"
             }`}
           >
@@ -72,8 +72,8 @@ const Showcase = ({
                       ? "text-gray-600 cursor-not-allowed"
                       : "text-gray-400 cursor-not-allowed"
                     : darkMode
-                    ? "text-orange-400 hover:bg-gray-800 border border-gray-700"
-                    : "text-orange-600 hover:bg-orange-50 border border-gray-200"
+                    ? "text-orange-400 border border-gray-700"
+                    : "text-orange-600 border border-gray-200"
                 }`}
                 aria-label="Previous page"
               >
@@ -109,8 +109,8 @@ const Showcase = ({
                       ? "text-gray-600 cursor-not-allowed"
                       : "text-gray-400 cursor-not-allowed"
                     : darkMode
-                    ? "text-orange-400 hover:bg-gray-800 border border-gray-700"
-                    : "text-orange-600 hover:bg-orange-50 border border-gray-200"
+                    ? "text-orange-400 border border-gray-700"
+                    : "text-orange-600 border border-gray-200"
                 }`}
                 aria-label="Next page"
               >
@@ -141,10 +141,10 @@ const Showcase = ({
             placeholder="Search projects by name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className={`w-full px-5 py-3 pl-12 rounded-xl border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500 ${
+            className={`w-full px-5 py-3 pl-12 rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#c15f3c] ${
               darkMode
-                ? "border-gray-700 bg-gray-800/50 text-gray-200 placeholder-gray-500 focus:bg-gray-800"
-                : "border-gray-200 bg-white text-gray-800 placeholder-gray-400 focus:border-orange-300"
+                ? "bg-[#1e1e1d] text-gray-200"
+                : "border border-gray-200 text-gray-800 placeholder-gray-400 focus:border-[#c15f3c]"
             }`}
           />
           <svg
@@ -191,16 +191,16 @@ const Showcase = ({
             onClick={() => setSelectedProject(project)}
             className={`group relative p-6 rounded-xl cursor-pointer overflow-hidden transition-all duration-300 ${
               darkMode
-                ? "bg-gray-800/50 hover:bg-gray-800 border border-gray-700 hover:border-orange-500/50"
-                : "bg-white hover:bg-gray-50 border border-gray-200 hover:border-orange-300 shadow-sm hover:shadow-lg"
+                ? "bg-[#1e1e1d]"
+                : "bg-white/50 hover:bg-gray-50 border border-gray-200 hover:border-[#c15f3c] shadow-sm hover:shadow-lg"
             }`}
           >
             {/* Orange accent line */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-orange-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#c15f3c] to-[#c15f3c] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
             {/* Project Number Badge */}
             <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center">
-              <span className="text-xs font-bold text-orange-500">
+              <span className="text-xs font-bold text-[#c15f3c]">
                 #{String(startIndex + index + 1).padStart(2, "0")}
               </span>
             </div>
@@ -237,7 +237,7 @@ const Showcase = ({
                         : "bg-gray-100 text-gray-600"
                     }`}
                   >
-                    +{project.tech.length - 4}
+                    +{project.tech.length - 2}
                   </span>
                 )}
               </div>
