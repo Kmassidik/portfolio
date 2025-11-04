@@ -6,6 +6,7 @@ import { ShowCaseModal, BlogModal } from "./components/Modals";
 import { About, Showcase, Blog } from "./components/Sections";
 import { projects, blogPosts } from "./data";
 import type { Project, BlogPost } from "./types";
+import Hobby from "./components/Sections/Hobby";
 
 function App() {
   const { darkMode, setDarkMode } = useDarkMode();
@@ -15,7 +16,7 @@ function App() {
 
   return (
     <div
-      className={`min-h-screen ${
+      className={`md:min-h-screen ${
         darkMode ? "bg-[#262624]" : "bg-white"
       } transition-colors duration-300`}
     >
@@ -49,6 +50,8 @@ function App() {
                     setSelectedPost={setSelectedPost}
                   />
                 )}
+
+                {activeSection === "hobby" && <Hobby darkMode={darkMode} />}
               </AnimatePresence>
             </div>
           </div>

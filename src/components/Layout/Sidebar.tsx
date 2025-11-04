@@ -26,7 +26,7 @@ const Sidebar = ({ darkMode, setDarkMode }: SidebarProps) => {
       animate={{ x: 0, opacity: 1 }}
       className={`
         md:w-80 w-full 
-        min-h-screen md:h-auto 
+        md:h-auto 
         ${textColor} 
         p-8 flex flex-col items-center justify-center
         transition-colors duration-300 ease-in-out

@@ -55,7 +55,7 @@ const Showcase = ({
 
         <div className="flex items-center gap-3">
           <p
-            className={`text-xs  md:text-lg ${
+            className={`text-xs md:text-lg ${
               darkMode ? "text-gray-400" : "text-gray-600"
             }`}
           >
@@ -66,14 +66,14 @@ const Showcase = ({
               <button
                 onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
                 disabled={currentPage === 1}
-                className={`p-2 rounded-lg transition-all duration-300 ${
+                className={`p-2 rounded-lg transition-all duration-300 border ${
                   currentPage === 1
                     ? darkMode
-                      ? "text-gray-600 cursor-not-allowed"
-                      : "text-gray-400 cursor-not-allowed"
+                      ? "text-gray-600 border-gray-700 cursor-not-allowed"
+                      : "text-gray-400 border-gray-200 cursor-not-allowed"
                     : darkMode
-                    ? "text-orange-400 border border-gray-700"
-                    : "text-orange-600 border border-gray-200"
+                    ? "text-[#c15f3c] border-gray-700 hover:bg-[#c15f3c]/10"
+                    : "text-[#c15f3c] border-gray-200 hover:bg-[#c15f3c]/10"
                 }`}
                 aria-label="Previous page"
               >
@@ -103,14 +103,14 @@ const Showcase = ({
                   setCurrentPage((prev) => Math.min(totalPages, prev + 1))
                 }
                 disabled={currentPage === totalPages}
-                className={`p-2 rounded-lg transition-all duration-300 ${
+                className={`p-2 rounded-lg transition-all duration-300 border ${
                   currentPage === totalPages
                     ? darkMode
-                      ? "text-gray-600 cursor-not-allowed"
-                      : "text-gray-400 cursor-not-allowed"
+                      ? "text-gray-600 border-gray-700 cursor-not-allowed"
+                      : "text-gray-400 border-gray-200 cursor-not-allowed"
                     : darkMode
-                    ? "text-orange-400 border border-gray-700"
-                    : "text-orange-600 border border-gray-200"
+                    ? "text-[#c15f3c] border-gray-700 hover:bg-[#c15f3c]/10"
+                    : "text-[#c15f3c] border-gray-200 hover:bg-[#c15f3c]/10"
                 }`}
                 aria-label="Next page"
               >
@@ -143,8 +143,8 @@ const Showcase = ({
             onChange={(e) => setSearch(e.target.value)}
             className={`w-full px-5 py-3 pl-12 rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#c15f3c] ${
               darkMode
-                ? "bg-[#1e1e1d] text-gray-200"
-                : "border border-gray-200 text-gray-800 placeholder-gray-400 focus:border-[#c15f3c]"
+                ? "bg-[#1e1e1d] text-gray-200 border border-gray-700"
+                : "bg-white border border-gray-200 text-gray-800 placeholder-gray-400"
             }`}
           />
           <svg
@@ -189,17 +189,17 @@ const Showcase = ({
             transition={{ delay: index * 0.05 }}
             whileHover={{ y: -8, transition: { duration: 0.2 } }}
             onClick={() => setSelectedProject(project)}
-            className={`group relative p-6 rounded-xl cursor-pointer overflow-hidden transition-all duration-300 ${
+            className={`group relative p-6 rounded-xl cursor-pointer overflow-hidden transition-all duration-300 border ${
               darkMode
-                ? "bg-[#1e1e1d]"
-                : "bg-white/50 hover:bg-gray-50 border border-gray-200 hover:border-[#c15f3c] shadow-sm hover:shadow-lg"
+                ? "bg-[#1e1e1d] border-gray-700/50 hover:border-[#c15f3c]/50 hover:bg-gray-800/50"
+                : "bg-white/50 border-gray-200 hover:border-[#c15f3c] hover:bg-white shadow-sm hover:shadow-lg"
             }`}
           >
             {/* Orange accent line */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#c15f3c] to-[#c15f3c] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            <div className="absolute top-0 left-0 w-full h-1 bg-[#c15f3c] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
             {/* Project Number Badge */}
-            <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center">
+            <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#c15f3c]/10 flex items-center justify-center group-hover:bg-[#c15f3c]/20 transition-colors duration-300">
               <span className="text-xs font-bold text-[#c15f3c]">
                 #{String(startIndex + index + 1).padStart(2, "0")}
               </span>
@@ -209,7 +209,9 @@ const Showcase = ({
             <div className="flex flex-col h-full">
               <h3
                 className={`text-xl font-bold mb-3 pr-10 line-clamp-2 transition-colors duration-300 ${
-                  darkMode ? "text-gray-100 " : "text-gray-900"
+                  darkMode
+                    ? "text-gray-100 group-hover:text-white"
+                    : "text-gray-900 group-hover:text-black"
                 }`}
               >
                 {project.name}
@@ -220,21 +222,17 @@ const Showcase = ({
                 {project.tech.slice(0, 2).map((tech) => (
                   <span
                     key={tech}
-                    className={`text-xs font-medium px-3 py-1 rounded-full transition-all duration-300 ${
-                      darkMode
-                        ? "text-orange-400 border border-orange-500/20 group-hover:bg-orange-500/20"
-                        : "text-orange-600 border border-orange-200 group-hover:bg-orange-100"
-                    }`}
+                    className={`text-xs font-medium px-3 py-1 rounded-full transition-all duration-300 text-[#c15f3c] border border-[#c15f3c]/30 group-hover:bg-[#c15f3c]/20 group-hover:border-[#c15f3c]`}
                   >
                     {tech}
                   </span>
                 ))}
                 {project.tech.length > 2 && (
                   <span
-                    className={`text-xs font-medium px-3 py-1 rounded-full ${
+                    className={`text-xs font-medium px-3 py-1 rounded-full transition-all duration-300 ${
                       darkMode
-                        ? "bg-gray-700 text-gray-400"
-                        : "bg-gray-100 text-gray-600"
+                        ? "bg-gray-700 text-gray-400 group-hover:bg-gray-600"
+                        : "bg-gray-100 text-gray-600 group-hover:bg-gray-200"
                     }`}
                   >
                     +{project.tech.length - 2}
@@ -243,14 +241,10 @@ const Showcase = ({
               </div>
 
               {/* Hover Arrow */}
-              <div
-                className={`mt-4 flex items-center gap-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
-                  darkMode ? "text-orange-400" : "text-orange-600"
-                }`}
-              >
+              <div className="mt-4 flex items-center gap-2 text-sm font-medium text-[#c15f3c]">
                 <span>View details</span>
                 <svg
-                  className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
+                  className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

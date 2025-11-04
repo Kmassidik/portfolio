@@ -6,7 +6,7 @@ interface NavigationProps {
   darkMode: boolean;
 }
 
-const sections = ["About Me", "Showcase", "Blog"];
+const sections = ["About Me", "Showcase", "Blog", "Hobby"];
 
 const Navigation = ({
   activeSection,

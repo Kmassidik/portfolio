@@ -137,7 +137,7 @@ const BlogModal = ({
           exit={{ scale: 0.95, opacity: 0, y: 20 }}
           transition={{ type: "spring", duration: 0.5 }}
           onClick={(e) => e.stopPropagation()}
-          className={`relative rounded-2xl p-4 sm:p-6 md:p-8 max-w-4xl w-full overflow-y-auto max-h-[90vh] shadow-2xl border transition-colors ${
+          className={`relative rounded-2xl p-4 sm:p-6 md:p-8 max-w-4xl w-full overflow-y-auto custom-scrollbar max-h-[90vh] shadow-2xl border transition-colors ${
             darkMode
               ? "bg-[#1e1e1d] text-gray-200 border-gray-700/50"
               : "bg-white text-gray-800 border-gray-200/50"
