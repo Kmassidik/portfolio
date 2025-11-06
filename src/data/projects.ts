@@ -5,7 +5,7 @@ export const projects: Project[] = [
     id: "1",
     name: "Social Ai",
     description: `
-![Social Ai](https://picsum.photos/seed/social-ai/600/300)
+![Social Ai](https://res.cloudinary.com/ddp528yjf/image/upload/v1762314566/Screenshot_from_2025-11-05_10-36-34_f9mbvi.webp)
 
 Launched **SocialAi**, a digital twin AI platform for public and commercial interaction, designed to be secure, reliable, and scalable. Implemented advanced media features: AI-based image generation (LoRA, OpenAI), video lip-sync, and multiple TTS models to enable seamless multimedia content creation. Built with Next.js frontend, Python services, and Supabase for data/authentication, delivering a production-ready platform now live with users.
 
@@ -66,9 +66,9 @@ Demonstrates skills in full-stack development for IoT applications, combining we
   },
   {
     id: "3",
-    name: "Sopan Sepadan",
+    name: "Sobat Sepadan",
     description: `
-![Sopan Sepadan](https://picsum.photos/seed/sopan-sepadan/600/300)
+![Sopan Sepadan](https://res.cloudinary.com/ddp528yjf/image/upload/v1762315296/sepadan_q65jeq.webp)
 
 Built the **frontend** of a freelance project based on Figma designs, focusing on CRUD operations and document upload workflows. Integrated with a provided backend API to handle ID verification (KTP and related documents), including error handling for invalid formats. The project was successfully deployed and used by end-users.
 
@@ -79,7 +79,7 @@ Built the **frontend** of a freelance project based on Figma designs, focusing o
 - Design-to-code implementation from Figma
 
 ## Tech Stack
-Vue, Firebase
+Vue js, Axios, Pinia
 
 ### Why this project?
 Highlights proficiency in frontend development, API integrations, and delivering client-ready freelance solutions with a focus on user workflows.
@@ -87,7 +87,7 @@ Highlights proficiency in frontend development, API integrations, and delivering
 **Demo:** [Try it here](https://demo.com)  
 **GitHub:** [View Source](https://github.com)
     `,
-    tech: ["Vue", "Firebase"],
+    tech: ["Vue", "Axios", "Pinia"],
     github: "https://github.com",
     demo: "https://demo.com",
   },
@@ -95,7 +95,7 @@ Highlights proficiency in frontend development, API integrations, and delivering
     id: "4",
     name: "Talk To Me",
     description: `
-![Talk To Me](https://picsum.photos/seed/talk-to-me/600/300)
+![Talk To Me](https://res.cloudinary.com/ddp528yjf/image/upload/v1762315564/Screenshot_from_2025-11-04_20-43-22_zulpmo.webp)
 
 Developed an **interactive web application** that allows users to converse with video content, featuring forward/rewind controls built with Three.js and conversational AI powered by ElevenLabs. Implemented the frontend in React.js, delivering a seamless and engaging user experience for proof-of-concept demonstration.
 
@@ -122,7 +122,7 @@ Showcases innovative use of 3D web tech and AI for interactive experiences, prov
     id: "5",
     name: "Code Scanner",
     description: `
-![Code Scanner](https://picsum.photos/seed/code-scanner/600/300)
+![Code Scanner](https://res.cloudinary.com/ddp528yjf/image/upload/v1762315846/code-scan_twz6bf.webp)
 
 Built a **proof-of-concept security tool** that provides AI-powered static code analysis to detect vulnerabilities in real time and enforce best practices before deployment. Developed the frontend with Next.js + Zustand, integrating with backend APIs to deliver secure and reliable workflows.
 
@@ -149,7 +149,7 @@ Illustrates expertise in security tools and AI applications in dev ops, focusing
     id: "6",
     name: "Dalang.io",
     description: `
-![Dalang.io](https://picsum.photos/seed/dalang-io/600/300)
+![Dalang.io](https://res.cloudinary.com/ddp528yjf/image/upload/v1762316281/dalang_dxyhhm.webp)
 
 Developed the **full web product showcase** (landing / product pages) for Dalang.io, implementing designs with Svelte and integrating payments via Xendit, data & auth via Supabase. Deployed the site successfully and ensured responsive performance for prospective customers.
 
@@ -333,183 +333,6 @@ Illustrates full-stack e-commerce-like development for professional services, en
 **GitHub:** [View Source](https://github.com)
     `,
     tech: ["React.js", "Node.js", "Express.js", "Redux", "PostgreSQL", "JWT"],
-    github: "https://github.com",
-    demo: "https://demo.com",
-  },
-  {
-    id: "13",
-    name: "Luminova",
-    description: `
-![Luminova](https://picsum.photos/seed/luminova/600/300)
-
-Built a **company profile website** for Luminova, enabling the organization to present its services and brand presence online with a professional, responsive design.
-
-## Features:
-- Responsive company showcase
-- Service presentations
-- Brand-focused design
-- Easy content management
-
-## Tech Stack
-WordPress
-
-### Why this project?
-Demonstrates quick deployment of professional sites using CMS for business needs.
-
-**Demo:** [Try it here](https://demo.com)  
-**GitHub:** [View Source](https://github.com)
-    `,
-    tech: ["WordPress"],
-    github: "https://github.com",
-    demo: "https://demo.com",
-  },
-  {
-    id: "14",
-    name: "Study Buddy",
-    description: `
-![Study Buddy](https://picsum.photos/seed/study-buddy/600/300)
-
-This app is a **platform for connecting students and teachers**, serving a variety of educational needs.
-
-## Features:
-- Student-teacher matching
-- Educational resource handling
-- File uploads (Multer)
-- Testing with Jest and Supertest
-
-## Tech Stack
-React-Native, React-redux, MongoDB, OpenAI, Multer, Jest, Supertest
-
-### Why this project?
-Showcases mobile edtech development with AI integrations and robust testing.
-
-**Demo:** [Try it here](https://demo.com)  
-**GitHub:** [View Source](https://github.com)
-    `,
-    tech: [
-      "React-Native",
-      "React-redux",
-      "MongoDB",
-      "OpenAI",
-      "Multer",
-      "Jest",
-      "Supertest",
-    ],
-    github: "https://github.com",
-    demo: "https://demo.com",
-  },
-  {
-    id: "15",
-    name: "JECO-Mobile",
-    description: `
-![JECO-Mobile](https://picsum.photos/seed/jeco-mobile/600/300)
-
-A **mobile platform** for viewing menus and checking details.
-
-## Features:
-- Menu browsing and details
-- Secure auth with JWT and bcrypt
-- GraphQL data fetching
-- Containerized with Docker
-
-## Tech Stack
-React-Native, React-redux, MongoDB, axios, Postgres, jsonwebtoken, bcrypt, sequelize, express, graphql, apollo-client, docker
-
-### Why this project?
-Highlights complex mobile app development with modern data layers and security.
-
-**Demo:** [Try it here](https://demo.com)  
-**GitHub:** [View Source](https://github.com)
-    `,
-    tech: [
-      "React-Native",
-      "React-redux",
-      "MongoDB",
-      "axios",
-      "Postgres",
-      "jsonwebtoken",
-      "bcrypt",
-      "sequelize",
-      "express",
-      "graphql",
-      "apollo-client",
-      "docker",
-    ],
-    github: "https://github.com",
-    demo: "https://demo.com",
-  },
-  {
-    id: "16",
-    name: "JECO-Web",
-    description: `
-![JECO-Web](https://picsum.photos/seed/jeco-web/600/300)
-
-A **web-based platform** for creating menus, categories, and ingredients.
-
-## Features:
-- Menu and category management
-- Secure backend integrations
-- Animations with GSAP
-- User alerts with SweetAlert
-
-## Tech Stack
-axios, Postgres, jsonwebtoken, bcrypt, sequelize-cli, express, reactJs, react-redux, gsap, sweetalert
-
-### Performance
-Efficient data handling and smooth UI interactions.
-
-**Demo:** [Try it here](https://demo.com)  
-**GitHub:** [View Source](https://github.com)
-    `,
-    tech: [
-      "axios",
-      "Postgres",
-      "jsonwebtoken",
-      "bcrypt",
-      "sequelize-cli",
-      "express",
-      "reactJs",
-      "react-redux",
-      "gsap",
-      "sweetalert",
-    ],
-    github: "https://github.com",
-    demo: "https://demo.com",
-  },
-  {
-    id: "17",
-    name: "Restaurant",
-    description: `
-![Restaurant](https://picsum.photos/seed/restaurant-app/600/300)
-
-A **web-based platform** for ordering from a menu, creating wishlists, and sharing via QR codes.
-
-## Features:
-- Menu ordering and wishlists
-- QR code sharing
-- Google auth integration
-- State management with Pinia
-
-## Tech Stack
-google-auth, axios, Postgres, jsonwebtoken, sequelize-cli, express, pinia, vue, firebase
-
-### Why this project?
-Demonstrates e-commerce features in a restaurant context with social sharing.
-
-**Demo:** [Try it here](https://demo.com)  
-**GitHub:** [View Source](https://github.com)
-    `,
-    tech: [
-      "google-auth",
-      "axios",
-      "Postgres",
-      "jsonwebtoken",
-      "sequelize-cli",
-      "express",
-      "pinia",
-      "vue",
-      "firebase",
-    ],
     github: "https://github.com",
     demo: "https://demo.com",
   },

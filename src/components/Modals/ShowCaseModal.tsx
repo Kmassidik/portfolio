@@ -196,38 +196,6 @@ const ShowCaseModal = ({
             </div>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex gap-3 pt-4">
-            {selectedProject.demo && (
-              <a
-                href={selectedProject.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`px-6 py-2.5 rounded-lg font-medium transition-all shadow-md hover:shadow-lg ${
-                  darkMode
-                    ? "bg-white/10 text-gray-200 hover:bg-white/20 border border-gray-700/50"
-                    : "bg-white text-gray-800 hover:bg-gray-100 border border-gray-200/50"
-                }`}
-              >
-                Live Demo
-              </a>
-            )}
-            {selectedProject.github && (
-              <a
-                href={selectedProject.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`px-6 py-2.5 rounded-lg font-medium transition-all shadow-md hover:shadow-lg ${
-                  darkMode
-                    ? "bg-[#1e1e1d] text-gray-200 border border-gray-700 hover:bg-gray-800"
-                    : "bg-gray-900 text-white hover:bg-gray-800"
-                }`}
-              >
-                View Code
-              </a>
-            )}
-          </div>
-
           {/* Markdown Style Overrides */}
           <style>{`
             .markdown-content {
