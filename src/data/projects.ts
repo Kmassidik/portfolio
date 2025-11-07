@@ -14,25 +14,22 @@ Launched **SocialAi**, a digital twin AI platform for public and commercial inte
 - Advanced multimedia content creation (image gen, lip-sync, TTS)
 - User authentication and data management
 - Production-ready deployment with active users
+  },
 
 ## Tech Stack
-Next.js, Python, Supabase, LoRA, OpenAI API, TTS
+Next.js, Python, Supabase, GenAI, OpenAI API, TTS
 
 ### Why this project?
 This project showcases expertise in AI-driven platforms, integrating cutting-edge models for multimedia and ensuring scalability in a live environment.
 
-**Demo:** [Try it here](https://demo.com)  
-**GitHub:** [View Source](https://github.com)
-    `,
-    tech: ["Next.js", "Python", "Supabase", "LoRA", "OpenAI API", "TTS"],
-    github: "https://github.com",
-    demo: "https://demo.com",
+**Link: ** [Try it here](https://socai.id)`,
+    tech: ["Next.js", "Python", "Supabase", "GenAI", "OpenAI API", "TTS"],
   },
   {
     id: "2",
     name: "Bus Track Command",
     description: `
-![Bus Track Command](https://picsum.photos/seed/bus-track/600/300)
+![Bus Track Command](https://res.cloudinary.com/ddp528yjf/image/upload/v1762499307/tts_dahsboard_y5weii.webp)
 
 Developed a **proof-of-concept system** to automate bus announcements, including a React + Zustand dashboard, Golang + PostgreSQL backend, and Raspberry Pi MQTT client. Integrated ElevenLabs voice generation and deployed services with Docker to ensure scalable, reliable operation.
 
@@ -48,8 +45,7 @@ React, Zustand, Golang, PostgreSQL, Raspberry Pi, MQTT, Docker, ElevenLabs API
 ### Why this project?
 Demonstrates skills in full-stack development for IoT applications, combining web dashboards, backend services, and hardware integration for real-world automation.
 
-**Demo:** [Try it here](https://demo.com)  
-**GitHub:** [View Source](https://github.com)
+**Demo:** [Try it here](https://google.com)  
     `,
     tech: [
       "React",
@@ -61,8 +57,6 @@ Demonstrates skills in full-stack development for IoT applications, combining we
       "Docker",
       "ElevenLabs API",
     ],
-    github: "https://github.com",
-    demo: "https://demo.com",
   },
   {
     id: "3",
@@ -83,13 +77,8 @@ Vue js, Axios, Pinia
 
 ### Why this project?
 Highlights proficiency in frontend development, API integrations, and delivering client-ready freelance solutions with a focus on user workflows.
-
-**Demo:** [Try it here](https://demo.com)  
-**GitHub:** [View Source](https://github.com)
     `,
     tech: ["Vue", "Axios", "Pinia"],
-    github: "https://github.com",
-    demo: "https://demo.com",
   },
   {
     id: "4",
@@ -110,13 +99,8 @@ React.js, Three.js, ElevenLabs API
 
 ### Why this project?
 Showcases innovative use of 3D web tech and AI for interactive experiences, proving skills in modern frontend and multimedia integrations.
-
-**Demo:** [Try it here](https://demo.com)  
-**GitHub:** [View Source](https://github.com)
     `,
     tech: ["React.js", "Three.js", "ElevenLabs API"],
-    github: "https://github.com",
-    demo: "https://demo.com",
   },
   {
     id: "5",
@@ -138,12 +122,9 @@ Next.js, Zustand
 ### Why this project?
 Illustrates expertise in security tools and AI applications in dev ops, focusing on proactive code quality and safety.
 
-**Demo:** [Try it here](https://demo.com)  
-**GitHub:** [View Source](https://github.com)
+**Demo:** [Try it here](https://code.dalang.io)  
     `,
     tech: ["Next.js", "Zustand"],
-    github: "https://github.com",
-    demo: "https://demo.com",
   },
   {
     id: "6",
@@ -165,18 +146,16 @@ Svelte, Supabase, Xendit
 ### Why this project?
 Demonstrates end-to-end web development for product showcases, including e-commerce elements and modern frameworks.
 
-**Demo:** [Try it here](https://demo.com)  
+**Demo:** [Try it here](https://google.com)  
 **GitHub:** [View Source](https://github.com)
     `,
     tech: ["Svelte", "Supabase", "Xendit"],
-    github: "https://github.com",
-    demo: "https://demo.com",
   },
   {
     id: "7",
-    name: "Skuy-Kondangan",
+    name: "Wedding Invation",
     description: `
-![Skuy-Kondangan](https://picsum.photos/seed/skuy-kondangan/600/300)
+![Skuy-Kondangan](https://res.cloudinary.com/ddp528yjf/image/upload/v1762504654/kondangan_rfvwrb.webp)
 
 Developed a **digital wedding invitation platform** that allows users to create and share customizable online invitations with features like RSVP tracking, event details, and guest management. Built the frontend with Vue and integrated with Firebase for authentication, database, and hosting.
 
@@ -192,18 +171,15 @@ Vue, Firebase
 ### Why this project?
 Shows ability to build user-friendly event platforms with real-time features and cloud services for quick deployment.
 
-**Demo:** [Try it here](https://demo.com)  
-**GitHub:** [View Source](https://github.com)
+**GitHub:** [View Source](https://github.com/Kmassidik/skuy-kondangan)
     `,
     tech: ["Vue", "Firebase"],
-    github: "https://github.com",
-    demo: "https://demo.com",
   },
   {
     id: "8",
     name: "IMPACT LAB",
     description: `
-![IMPACT LAB](https://picsum.photos/seed/impact-lab/600/300)
+![IMPACT LAB](https://res.cloudinary.com/ddp528yjf/image/upload/v1762521182/impact_v32l8t.jpg)
 
 Built a **task management platform** to help users create, organize, and track to-do lists collaboratively. Implemented CRUD functionality, task status updates, and user-friendly UI to streamline personal and team productivity.
 
@@ -219,68 +195,48 @@ PHP, MySQL
 ### Why this project?
 Highlights backend-driven development for productivity tools, emphasizing collaboration and data management.
 
-**Demo:** [Try it here](https://demo.com)  
-**GitHub:** [View Source](https://github.com)
+**GitHub:** [View Source](https://github.com/Kmassidik/php_impact.git)
     `,
     tech: ["PHP", "MySQL"],
-    github: "https://github.com",
-    demo: "https://demo.com",
   },
   {
     id: "9",
-    name: "Mobile Apps Customer Satisfaction",
+    name: "Customer Satisfaction Platform",
     description: `
-![Mobile Apps Customer Satisfaction](https://picsum.photos/seed/mobile-customer-sat/600/300)
+![Customer Satisfaction Platform](https://picsum.photos/seed/customer-sat/600/300)
 
-Developed a **mobile application** for collecting customer satisfaction feedback. The app allows users to submit reviews, track feedback, and analyze satisfaction.
+Developed a **comprehensive customer satisfaction platform** that includes both a **mobile application** for collecting user feedback and a **backend REST API** for managing, analyzing, and securing the data.
 
 ## Features:
-- Feedback submission and reviews
-- Tracking and analysis tools
-- User-friendly mobile interface
-- Data synchronization
+### Mobile Application
+- Feedback submission and reviews  
+- Tracking and analysis tools  
+- User-friendly mobile interface  
+- Real-time data synchronization  
+
+### Backend REST API
+- Secure authentication (JWT)  
+- Data storage and management (MySQL & Postgres)  
+- Feedback analysis endpoints  
+- Scalable RESTful API architecture  
 
 ## Tech Stack
-Flutter, Flutter Provider, Flutter HTTP
+**Frontend (Mobile):** Flutter, Flutter Provider, Flutter HTTP  
+**Backend (Server):** Go, Gin, MySQL, Postgres, JWT  
 
 ### Why this project?
-Demonstrates cross-platform mobile development focused on user feedback collection and analysis.
-
-**Demo:** [Try it here](https://demo.com)  
-**GitHub:** [View Source](https://github.com)
-    `,
-    tech: ["Flutter", "Flutter Provider", "Flutter HTTP"],
-    github: "https://github.com",
-    demo: "https://demo.com",
-  },
-  {
-    id: "10",
-    name: "Server Customer Satisfaction",
-    description: `
-![Server Customer Satisfaction](https://picsum.photos/seed/server-customer-sat/600/300)
-
-Built the **backend REST API** for a customer satisfaction platform, handling secure data storage, user authentication, and feedback analysis.
-
-## Features:
-- Secure authentication (JWT)
-- Data storage and management
-- Feedback analysis endpoints
-- RESTful API design
-
-## Tech Stack
-Go, Gin, MySQL, Postgres, JWT
-
-### Security
-- JWT for authentication
-- Secure data handling
-- Scalable backend architecture
-
-**Demo:** [Try it here](https://demo.com)  
-**GitHub:** [View Source](https://github.com)
-    `,
-    tech: ["Go", "Gin", "MySQL", "Postgres", "JWT"],
-    github: "https://github.com",
-    demo: "https://demo.com",
+This project demonstrates **end-to-end development** — from cross-platform mobile design to secure and scalable backend systems — focused on customer feedback collection, analysis, and visualization.
+  `,
+    tech: [
+      "Flutter",
+      "Flutter Provider",
+      "Flutter HTTP",
+      "Go",
+      "Gin",
+      "MySQL",
+      "Postgres",
+      "JWT",
+    ],
   },
   {
     id: "11",
@@ -298,22 +254,19 @@ Developed a **REST API backend** for Indo Arsip's Document Management System (DM
 
 ## Tech Stack
 Node.js, Express.js, PHP, PostgreSQL, Sequelize, JWT
+**Demo:** [Try it here](https://google.com)  
 
 ### Why this project?
 Showcases backend development for enterprise DMS, including infrastructure setup and integrations.
-
-**Demo:** [Try it here](https://demo.com)  
-**GitHub:** [View Source](https://github.com)
     `,
     tech: ["Node.js", "Express.js", "PHP", "PostgreSQL", "Sequelize", "JWT"],
-    github: "https://github.com",
-    demo: "https://demo.com",
   },
   {
     id: "12",
     name: "Weborder Mitrapajak",
     description: `
-![Weborder Mitrapajak](https://picsum.photos/seed/weborder-mitrapajak/600/300)
+![Weborder **Demo:** [Try it here](https://google.com)  
+Mitrapajak](https://picsum.photos/seed/weborder-mitrapajak/600/300)
 
 Developed a **web platform** for Mitrapajak to streamline ordering of tax-related training and certification services. Delivered secure user authentication, order management, and efficient workflows, improving client accessibility to professional services.
 
@@ -328,12 +281,7 @@ React.js, Node.js, Express.js, Redux, PostgreSQL, JWT
 
 ### Why this project?
 Illustrates full-stack e-commerce-like development for professional services, enhancing business operations.
-
-**Demo:** [Try it here](https://demo.com)  
-**GitHub:** [View Source](https://github.com)
     `,
     tech: ["React.js", "Node.js", "Express.js", "Redux", "PostgreSQL", "JWT"],
-    github: "https://github.com",
-    demo: "https://demo.com",
   },
 ];

@@ -16,9 +16,7 @@ const Hobby = ({ darkMode }: HobbyProps) => {
       }`}
     >
       {/* Header */}
-      <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-8">
-        Hobbies & Interests
-      </h2>
+      <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-8">Hobbies</h2>
 
       {/* Spotify Playlist Section */}
       <div
@@ -33,7 +31,7 @@ const Hobby = ({ darkMode }: HobbyProps) => {
             darkMode ? "text-gray-400" : "text-gray-600"
           }`}
         >
-          <strong>Let's Sing My Playlist</strong>
+          <strong>My Playlist</strong>
         </p>
 
         <div className="w-full">

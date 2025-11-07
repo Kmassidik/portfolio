@@ -3,10 +3,9 @@ import { AnimatePresence } from "framer-motion";
 import { useDarkMode } from "./hooks/useDarkMode";
 import { Sidebar, Navigation } from "./components/Layout";
 import { ShowCaseModal, BlogModal } from "./components/Modals";
-import { About, Showcase, Blog } from "./components/Sections";
+import { About, Showcase, Blog, Hobby } from "./components/Sections";
 import { projects, blogPosts } from "./data";
 import type { Project, BlogPost } from "./types";
-import Hobby from "./components/Sections/Hobby";
 
 function App() {
   const { darkMode, setDarkMode } = useDarkMode();

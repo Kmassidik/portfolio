@@ -156,30 +156,6 @@ const BlogModal = ({
             <X size={22} />
           </button>
 
-          {/* Header */}
-          <div
-            className={`flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 sm:mb-6 pb-3 border-b ${
-              darkMode ? "border-gray-700/50" : "border-gray-200/50"
-            }`}
-          >
-            <div>
-              <h2
-                className={`text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 ${
-                  darkMode ? "text-gray-100" : "text-gray-900"
-                }`}
-              >
-                {selectedPost.title}
-              </h2>
-              <p
-                className={`text-xs sm:text-sm ${
-                  darkMode ? "text-gray-400" : "text-gray-600"
-                }`}
-              >
-                {selectedPost.date}
-              </p>
-            </div>
-          </div>
-
           {/* Markdown Content */}
           <div
             className="markdown-content text-[0.9rem] sm:text-[1rem] md:text-[1.05rem]"
@@ -222,11 +198,16 @@ const BlogModal = ({
               font-size: 1.5rem;
               font-weight: 700;
               margin: 1.5rem 0 1rem 0;
+              border-bottom: 5px solid #c15f3c;
+              line-height: normal;
             }
 
             @media (min-width: 640px) {
               .markdown-h1 {
                 font-size: 2rem;
+                font-weight: 500;
+                line-height: 1.2;
+                padding: 5px;              
               }
             }
 
