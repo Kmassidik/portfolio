@@ -104,8 +104,8 @@ const About = ({ darkMode }: AboutProps) => {
           After transitioning into software development through intensive
           bootcamps, I rapidly advanced to an Application Architect role where I
           enhanced system efficiency and reduced deployment onboarding time.
-          Currently, I'm working as a freelance Software Engineer, owning
-          end-to-end development from concept to deployment.
+          Currently, I'm working as a Software Engineer, owning end-to-end
+          development from concept to deployment.
         </p>
       </div>
 
