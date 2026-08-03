@@ -1,0 +1,9 @@
+services:
+  dev:
+    build: .
+    image: porto:dev
+    ports:
+      - "5174:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules

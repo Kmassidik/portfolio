@@ -1,79 +1,74 @@
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { Suspense, lazy, useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useDarkMode } from "./hooks/useDarkMode";
-import { Sidebar, Navigation } from "./components/Layout";
-import { ShowCaseModal, BlogModal } from "./components/Modals";
-import { About, Showcase, Blog, Hobby } from "./components/Sections";
-import { projects, blogPosts } from "./data";
-import type { Project, BlogPost } from "./types";
+import FloatingNav from "./components/FloatingNav";
+import { About, Experience, Projects, NotesList } from "./sections";
+
+// react-markdown only loads when someone actually opens a note.
+const Article = lazy(() => import("./sections/Notes/Article"));
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  // Block body on purpose: a concise arrow would return scrollTo's value,
+  // which React would then treat as a cleanup function.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
 
 function App() {
   const { darkMode, setDarkMode } = useDarkMode();
-  const [activeSection, setActiveSection] = useState("aboutme");
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const location = useLocation();
+  const reduceMotion = useReducedMotion();
+
+  const fade = reduceMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 12 },
+        animate: { opacity: 1, y: 0 },
+        exit: { opacity: 0, y: -12 },
+        transition: { duration: 0.25 },
+      };
 
   return (
     <div
-      className={`md:min-h-screen ${
-        darkMode ? "bg-[#262624]" : "bg-white"
+      className={`min-h-screen ${
+        darkMode ? "bg-[#262624] text-white" : "bg-white text-gray-800"
       } transition-colors duration-300`}
     >
-      <div className="flex flex-col md:flex-row md:container md:mx-auto">
-        <Sidebar darkMode={darkMode} setDarkMode={setDarkMode} />
+      <ScrollToTop />
 
-        <main className="flex-1 flex flex-col md:h-screen overflow-hidden">
-          <Navigation
-            activeSection={activeSection}
-            setActiveSection={setActiveSection}
-            darkMode={darkMode}
-          />
-
-          <div className="flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar">
-            <div className="p-4 md:p-8 pb-8 md:pb-12">
-              <AnimatePresence mode="wait">
-                {activeSection === "aboutme" && <About darkMode={darkMode} />}
-
-                {activeSection === "showcase" && (
-                  <Showcase
-                    darkMode={darkMode}
-                    projects={projects}
-                    setSelectedProject={setSelectedProject}
-                  />
-                )}
-
-                {activeSection === "blog" && (
-                  <Blog
-                    darkMode={darkMode}
-                    blogPosts={blogPosts}
-                    setSelectedPost={setSelectedPost}
-                  />
-                )}
-
-                {activeSection === "hobby" && <Hobby darkMode={darkMode} />}
-              </AnimatePresence>
-            </div>
-          </div>
-        </main>
-      </div>
-
-      <AnimatePresence>
-        {selectedProject && (
-          <ShowCaseModal
-            selectedProject={selectedProject}
-            setSelectedProject={setSelectedProject}
-            darkMode={darkMode}
-          />
-        )}
-
-        {selectedPost && (
-          <BlogModal
-            selectedPost={selectedPost}
-            setSelectedPost={setSelectedPost}
-            darkMode={darkMode}
-          />
-        )}
+      <AnimatePresence mode="wait">
+        <motion.main
+          key={location.pathname}
+          {...fade}
+          className="mx-auto flex w-full max-w-3xl justify-center px-6 pt-16 pb-32"
+        >
+          <Suspense fallback={null}>
+            <Routes location={location}>
+              <Route path="/" element={<About darkMode={darkMode} />} />
+              <Route
+                path="/experience"
+                element={<Experience darkMode={darkMode} />}
+              />
+              <Route
+                path="/projects"
+                element={<Projects darkMode={darkMode} />}
+              />
+              <Route path="/notes" element={<NotesList darkMode={darkMode} />} />
+              <Route
+                path="/notes/:slug"
+                element={<Article darkMode={darkMode} />}
+              />
+              <Route path="*" element={<About darkMode={darkMode} />} />
+            </Routes>
+          </Suspense>
+        </motion.main>
       </AnimatePresence>
+
+      <FloatingNav darkMode={darkMode} setDarkMode={setDarkMode} />
     </div>
   );
 }
