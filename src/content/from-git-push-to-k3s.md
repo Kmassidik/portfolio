@@ -1,6 +1,6 @@
 ---
 title: From git push to running in k3s
-date: 2025-07-08
+date: 2025-02-13
 excerpt: The app was containerized and running on k3s, but I was still the deploy script. CI/CD with GitHub Actions and a GitOps setup took me out of that loop. A push ships it, and git is the source of truth.
 tags: devops, cicd, gitops, github-actions, argocd, kubernetes, k3s, automation
 ---

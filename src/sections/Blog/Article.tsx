@@ -18,6 +18,9 @@ import DataCenterRack from "./DataCenterRack";
 import DataCenterTiers from "./DataCenterTiers";
 import DataCenterCooling from "./DataCenterCooling";
 import DataCenterPower from "./DataCenterPower";
+import DependencyTree from "./DependencyTree";
+import RadioBridge from "./RadioBridge";
+import BandWavelengths from "./BandWavelengths";
 import { getPost, formatDate } from "../../lib/posts";
 
 // Render diagrams referenced from markdown as inline React SVGs so they follow
@@ -32,6 +35,9 @@ const diagrams: Record<string, () => ReactElement> = {
   "/blog/data-center-tiers.svg": DataCenterTiers,
   "/blog/data-center-cooling.svg": DataCenterCooling,
   "/blog/data-center-power.svg": DataCenterPower,
+  "/blog/dependency-tree.svg": DependencyTree,
+  "/blog/radio-bridge.svg": RadioBridge,
+  "/blog/band-wavelengths.svg": BandWavelengths,
 };
 
 const markdownComponents: Components = {

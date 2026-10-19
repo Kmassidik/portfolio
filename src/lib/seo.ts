@@ -29,7 +29,7 @@ export const routeMeta: Record<string, RouteMeta> = {
   "/blog": {
     title: "Blog — Kurnia Massidik",
     description:
-      "Ideas and lessons on software and systems, written by Kurnia Massidik.",
+      "Notes and lessons on software, systems, and hardware, written by Kurnia Massidik.",
   },
 };
 

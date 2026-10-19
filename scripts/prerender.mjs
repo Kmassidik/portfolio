@@ -87,7 +87,7 @@ const rssItems = posts
   .join("\n");
 writeFileSync(
   join(dist, "rss.xml"),
-  `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n<channel>\n  <title>Kurnia Massidik's Blog</title>\n  <link>${canonicalFor("/blog")}</link>\n  <description>Ideas and lessons from building software.</description>\n  <language>en</language>\n${rssItems}\n</channel>\n</rss>\n`
+  `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n<channel>\n  <title>Kurnia Massidik's Blog</title>\n  <link>${canonicalFor("/blog")}</link>\n  <description>Notes and lessons on software, systems, and hardware.</description>\n  <language>en</language>\n${rssItems}\n</channel>\n</rss>\n`
 );
 console.log("wrote rss.xml");
 

@@ -1,6 +1,6 @@
 ---
 title: From Kubernetes to k3s: the right amount of cluster
-date: 2025-05-12
+date: 2025-01-30
 excerpt: Docker got our app into a container. The next question was who runs it across machines. I started on full Kubernetes, then moved to k3s, both self-hosted on our own bare metal. Here's what actually decided it: scale, observability, and security.
 tags: devops, kubernetes, k3s, self-hosted, infrastructure, observability, containers, cloudflare
 ---
