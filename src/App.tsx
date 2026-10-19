@@ -6,8 +6,44 @@ import FloatingNav from "./components/FloatingNav";
 import RouteSeo from "./components/RouteSeo";
 import { About, Experience, Projects, BlogList } from "./sections";
 
-// react-markdown only loads when someone actually opens a post.
-const Article = lazy(() => import("./sections/Blog/Article"));
+// react-markdown only loads when someone actually opens a post. A failed chunk
+// import almost always means a new build replaced the hashed files under an
+// already-open tab, so reload once to fetch the fresh assets instead of showing
+// a broken page. The sessionStorage flag stops it from looping if a chunk is
+// genuinely missing.
+const Article = lazy(() =>
+  import("./sections/Blog/Article")
+    .then((mod) => {
+      if (typeof window !== "undefined") {
+        try {
+          sessionStorage.removeItem("chunkReload");
+        } catch {
+          /* storage unavailable */
+        }
+      }
+      return mod;
+    })
+    .catch((err) => {
+      if (typeof window !== "undefined") {
+        let reloaded = false;
+        try {
+          reloaded = sessionStorage.getItem("chunkReload") === "1";
+        } catch {
+          /* storage unavailable */
+        }
+        if (!reloaded) {
+          try {
+            sessionStorage.setItem("chunkReload", "1");
+          } catch {
+            /* storage unavailable */
+          }
+          window.location.reload();
+          return new Promise<never>(() => {});
+        }
+      }
+      throw err;
+    })
+);
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();

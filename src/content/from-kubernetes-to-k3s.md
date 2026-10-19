@@ -124,10 +124,10 @@ Three things, really.
 traffic. k3s handles what we run, and when we need more we add a node. Full k8s
 HA was solving a problem we didn't have yet.
 
-**Observability.** This was the one I cared most about getting right. k3s runs
-the same tooling as upstream Kubernetes, so we didn't give anything up: the same
-Prometheus and Grafana setup for metrics, and the same way of pulling logs. Being
-able to see what the cluster is doing was non-negotiable.
+**Observability.** This was the one I cared most about getting right. Prometheus
+scrapes the metrics, Grafana turns them into dashboards I actually look at, and
+that same setup runs on k3s exactly like it does on full Kubernetes. So I gave up
+nothing here. Being able to see what the cluster is doing was non-negotiable.
 
 **Security.** The Cloudflare Tunnel already means nothing is exposed inbound,
 which is most of the battle. On top of that Kubernetes gives you

@@ -11,6 +11,7 @@ import type { Components } from "react-markdown";
 import DockerMultiStage from "./DockerMultiStage";
 import K8sDiagram from "./K8sDiagram";
 import K8sHowItWorks from "./K8sHowItWorks";
+import CicdDiagram from "./CicdDiagram";
 import { getPost, formatDate } from "../../lib/posts";
 
 // Render diagrams referenced from markdown as inline React SVGs so they follow
@@ -19,6 +20,7 @@ const diagrams: Record<string, () => ReactElement> = {
   "/blog/docker-multistage.svg": DockerMultiStage,
   "/blog/k3s-architecture.svg": K8sDiagram,
   "/blog/how-kubernetes-works.svg": K8sHowItWorks,
+  "/blog/cicd-pipeline.svg": CicdDiagram,
 };
 
 const markdownComponents: Components = {
