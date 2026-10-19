@@ -57,4 +57,4 @@ export async function render(url: string): Promise<string> {
   return streamToString(prelude as unknown as NodeReadable);
 }
 
-export { canonicalFor };
+export { canonicalFor, posts };

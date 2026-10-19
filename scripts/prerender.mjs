@@ -9,7 +9,7 @@ const root = resolve(import.meta.dirname, "..");
 const dist = join(root, "dist");
 const ssrDir = join(root, "ssr-dist");
 
-const { render, routes, meta, canonicalFor } = await import(
+const { render, routes, meta, canonicalFor, posts } = await import(
   pathToFileURL(join(ssrDir, "entry-server.js")).href
 );
 
@@ -74,6 +74,22 @@ writeFileSync(
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries}\n</urlset>\n`
 );
 console.log("wrote sitemap.xml");
+
+// RSS feed for the blog, newest first (posts are already sorted by date).
+const rssItems = posts
+  .map((post) => {
+    const url = canonicalFor(`/blog/${post.slug}`);
+    const pubDate = post.date
+      ? new Date(post.date).toUTCString()
+      : new Date().toUTCString();
+    return `  <item>\n    <title>${escapeHtml(post.title)}</title>\n    <link>${url}</link>\n    <guid isPermaLink="true">${url}</guid>\n    <pubDate>${pubDate}</pubDate>\n    <description>${escapeHtml(post.excerpt)}</description>\n  </item>`;
+  })
+  .join("\n");
+writeFileSync(
+  join(dist, "rss.xml"),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n<channel>\n  <title>Kurnia Massidik's Blog</title>\n  <link>${canonicalFor("/blog")}</link>\n  <description>Ideas and lessons from building software.</description>\n  <language>en</language>\n${rssItems}\n</channel>\n</rss>\n`
+);
+console.log("wrote rss.xml");
 
 // The SSR bundle is a build artifact; it never ships.
 rmSync(ssrDir, { recursive: true, force: true });

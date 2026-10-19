@@ -15,7 +15,13 @@ const BlogList = ({ darkMode }: BlogListProps) => {
       <header className="mb-2">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Blog</h1>
         <p className={`mt-2 text-sm ${muted}`}>
-          Ideas and lessons from building software.
+          Ideas and lessons from building software.{" "}
+          <a
+            href="/rss.xml"
+            className="font-medium text-[#c15f3c] hover:underline"
+          >
+            RSS
+          </a>
         </p>
       </header>
 

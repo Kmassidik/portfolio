@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import rehypeHighlight from "rehype-highlight";
 import "katex/dist/katex.min.css";
 import type { ReactElement } from "react";
 import type { Components } from "react-markdown";
@@ -12,6 +13,11 @@ import DockerMultiStage from "./DockerMultiStage";
 import K8sDiagram from "./K8sDiagram";
 import K8sHowItWorks from "./K8sHowItWorks";
 import CicdDiagram from "./CicdDiagram";
+import WordpressSetup from "./WordpressSetup";
+import DataCenterRack from "./DataCenterRack";
+import DataCenterTiers from "./DataCenterTiers";
+import DataCenterCooling from "./DataCenterCooling";
+import DataCenterPower from "./DataCenterPower";
 import { getPost, formatDate } from "../../lib/posts";
 
 // Render diagrams referenced from markdown as inline React SVGs so they follow
@@ -21,6 +27,11 @@ const diagrams: Record<string, () => ReactElement> = {
   "/blog/k3s-architecture.svg": K8sDiagram,
   "/blog/how-kubernetes-works.svg": K8sHowItWorks,
   "/blog/cicd-pipeline.svg": CicdDiagram,
+  "/blog/wordpress-setup.svg": WordpressSetup,
+  "/blog/data-center-rack.svg": DataCenterRack,
+  "/blog/data-center-tiers.svg": DataCenterTiers,
+  "/blog/data-center-cooling.svg": DataCenterCooling,
+  "/blog/data-center-power.svg": DataCenterPower,
 };
 
 const markdownComponents: Components = {
@@ -110,7 +121,7 @@ const Article = ({ darkMode }: ArticleProps) => {
       <article className="article mt-10">
         <ReactMarkdown
           remarkPlugins={[remarkGfm, remarkMath]}
-          rehypePlugins={[rehypeKatex]}
+          rehypePlugins={[rehypeKatex, rehypeHighlight]}
           components={markdownComponents}
         >
           {post.body}

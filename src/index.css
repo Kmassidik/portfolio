@@ -212,6 +212,75 @@
   font-size: inherit;
 }
 
+/* Syntax highlighting (rehype-highlight / highlight.js tokens), themed so it
+   reads on both the light and dark code-block backgrounds. */
+.article .hljs-comment,
+.article .hljs-quote {
+  color: #9b9a94;
+  font-style: italic;
+}
+.article .hljs-keyword,
+.article .hljs-selector-tag,
+.article .hljs-literal,
+.article .hljs-section {
+  color: #b5542f;
+}
+.article .hljs-string,
+.article .hljs-meta .hljs-string {
+  color: #357960;
+}
+.article .hljs-number,
+.article .hljs-symbol,
+.article .hljs-bullet {
+  color: #2b6cb0;
+}
+.article .hljs-title,
+.article .hljs-name,
+.article .hljs-attr,
+.article .hljs-attribute,
+.article .hljs-type,
+.article .hljs-built_in {
+  color: #9a6a00;
+}
+.article .hljs-meta,
+.article .hljs-variable,
+.article .hljs-template-variable {
+  color: #8a6d9b;
+}
+
+[data-theme="dark"] .article .hljs-comment,
+[data-theme="dark"] .article .hljs-quote {
+  color: #7f7f79;
+}
+[data-theme="dark"] .article .hljs-keyword,
+[data-theme="dark"] .article .hljs-selector-tag,
+[data-theme="dark"] .article .hljs-literal,
+[data-theme="dark"] .article .hljs-section {
+  color: #e0885f;
+}
+[data-theme="dark"] .article .hljs-string,
+[data-theme="dark"] .article .hljs-meta .hljs-string {
+  color: #87c7a3;
+}
+[data-theme="dark"] .article .hljs-number,
+[data-theme="dark"] .article .hljs-symbol,
+[data-theme="dark"] .article .hljs-bullet {
+  color: #7fb0e0;
+}
+[data-theme="dark"] .article .hljs-title,
+[data-theme="dark"] .article .hljs-name,
+[data-theme="dark"] .article .hljs-attr,
+[data-theme="dark"] .article .hljs-attribute,
+[data-theme="dark"] .article .hljs-type,
+[data-theme="dark"] .article .hljs-built_in {
+  color: #e0b877;
+}
+[data-theme="dark"] .article .hljs-meta,
+[data-theme="dark"] .article .hljs-variable,
+[data-theme="dark"] .article .hljs-template-variable {
+  color: #c4a2d6;
+}
+
 .article hr {
   border: 0;
   border-top: 1px solid #e7e5e4;

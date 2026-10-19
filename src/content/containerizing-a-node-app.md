@@ -2,7 +2,7 @@
 title: Containerizing our deploys with Docker
 date: 2025-03-20
 excerpt: We used to deploy by pulling code onto a server by hand. Moving the app into a Docker container fixed most of that, but my first image was almost a gig. These are the few changes that made it small and boring to ship.
-tags: devops, docker
+tags: devops, docker, containers, nodejs, deployment, images
 ---
 
 For a while our deploys were pretty manual. SSH into the box, pull the latest
