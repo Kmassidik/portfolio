@@ -8,7 +8,7 @@ const items: { to: string; label: string; icon: LucideIcon }[] = [
   { to: "/", label: "About", icon: User },
   { to: "/experience", label: "Experience", icon: Briefcase },
   { to: "/projects", label: "Projects", icon: LayoutGrid },
-  { to: "/notes", label: "Notes", icon: PenLine },
+  { to: "/blog", label: "Blog", icon: PenLine },
 ];
 
 const isActive = (pathname: string, to: string) =>

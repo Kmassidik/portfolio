@@ -8,7 +8,7 @@
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 
     <!-- Basic SEO -->
-    <title>Kmassidik | Portfolio</title>
+    <title>Kurnia Massidik — Software Engineer Portfolio</title>
     <meta
       name="description"
       content="Portfolio of Kurnia Massidik — Software Engineer & Application Architect based in Jakarta, Indonesia. Explore AI projects, full-stack apps, IoT systems, and more."
@@ -23,7 +23,7 @@
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta
       property="og:title"
-      content="KurniaTech — Software Engineer Portfolio"
+      content="Kurnia Massidik — Software Engineer Portfolio"
     />
     <meta
       property="og:description"
@@ -31,7 +31,13 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://kurniatech.my.id" />
-    <meta property="og:image" content="https://kurniatech.my.id/og-image.jpg" />
+    <meta property="og:image" content="https://kurniatech.my.id/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Kurnia Massidik — Software Engineer & Application Architect"
+    />
     <meta property="og:site_name" content="KurniaTech" />
     <meta property="og:locale" content="en_US" />
 
@@ -39,7 +45,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="KurniaTech — Software Engineer Portfolio"
+      content="Kurnia Massidik — Software Engineer Portfolio"
     />
     <meta
       name="twitter:description"
@@ -47,9 +53,13 @@
     />
     <meta
       name="twitter:image"
-      content="https://kurniatech.my.id/og-image.jpg"
+      content="https://kurniatech.my.id/og-image.png"
     />
-    <meta name="twitter:creator" content="@kurniatech" />
+    <meta
+      name="twitter:image:alt"
+      content="Kurnia Massidik — Software Engineer & Application Architect"
+    />
+    <meta name="twitter:creator" content="@KMassidik" />
 
     <!-- Structured Data (JSON-LD for SEO) -->
     <script type="application/ld+json">
@@ -61,9 +71,9 @@
         "jobTitle": "Software Engineer",
         "description": "Software Engineer & Application Architect based in Jakarta, Indonesia.",
         "sameAs": [
-          "https://github.com",
-          "https://linkedin.com",
-          "https://twitter.com"
+          "https://github.com/kmassidik",
+          "https://www.linkedin.com/in/kurnia-massidik-3b176b149/",
+          "https://x.com/KMassidik"
         ],
         "worksFor": {
           "@type": "Organization",
@@ -88,6 +98,21 @@
 
     <!-- Theme color -->
     <meta name="theme-color" content="#0f172a" />
+
+    <!-- Apply the saved/OS theme before first paint — no flash of wrong theme
+         on the prerendered markup. -->
+    <script>
+      (function () {
+        try {
+          var s = localStorage.getItem("darkMode");
+          var dark =
+            s !== null
+              ? JSON.parse(s)
+              : window.matchMedia("(prefers-color-scheme: dark)").matches;
+          document.documentElement.dataset.theme = dark ? "dark" : "light";
+        } catch (e) {}
+      })();
+    </script>
 
     <!-- Preload fonts or critical assets if needed -->
     <!-- <link rel="preload" as="image" href="/og-image.jpg" /> -->

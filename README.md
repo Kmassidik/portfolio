@@ -1,24 +1,28 @@
 # Portfolio
 
-Personal site for **Kurnia Massidik** — About, Experience, Projects, and Notes (a Medium-style reading section).
+Personal site for **Kurnia Massidik** — About, Experience, Projects, and a Blog (a Medium-style reading section).
 
-React 19, TypeScript, Vite (rolldown), Tailwind v4, React Router, framer-motion, react-markdown.
+React 19, TypeScript, Vite (rolldown), Tailwind v4, React Router, framer-motion, react-markdown (with KaTeX math).
 
-## Writing a note
+## Writing a blog post
 
-**Drop one markdown file into `src/content/`. That's the whole process** — it's picked up automatically by `import.meta.glob`, sorted by date, and appears at `/notes`.
+**Drop one markdown file into `src/content/`. That's the whole process** — it's picked up automatically by `import.meta.glob`, sorted by date, and appears at `/blog`.
 
 ```markdown
 ---
 title: Why Pingora beat Nginx for our workload
 date: 2026-08-03
-excerpt: One or two sentences. Shown on the notes list, not in the article.
+excerpt: One or two sentences. Shown on the post list, not in the article.
 tags: infra, rust
-cover: /notes/pingora.webp
+cover: /blog/pingora.webp
 ---
 
 Body starts here. Standard markdown — headings, **bold**, lists,
 `code`, ```fenced blocks```, > quotes, tables, and links.
+
+Math works too, via KaTeX: inline `$E = mc^2$` and block:
+
+$$\int_0^1 x^2 \, dx = \frac{1}{3}$$
 ```
 
 | Field | Required | Notes |
@@ -29,18 +33,18 @@ Body starts here. Standard markdown — headings, **bold**, lists,
 | `tags` | no | Comma-separated |
 | `cover` | no | Path or URL; shown as list thumbnail and article header |
 
-The **filename becomes the URL**: `pingora-vs-nginx.md` → `/notes/pingora-vs-nginx`.
+The **filename becomes the URL**: `pingora-vs-nginx.md` → `/blog/pingora-vs-nginx`.
 Reading time is calculated from word count (200 wpm), rounded up.
 
 ### Images
 
-Put them in `public/notes/` and reference with a root-absolute path:
+Put them in `public/blog/` and reference with a root-absolute path:
 
 ```markdown
-![Benchmark results](/notes/benchmark.webp)
+![Benchmark results](/blog/benchmark.webp)
 ```
 
-Anything under `public/` is served as-is, so `public/notes/foo.webp` is `/notes/foo.webp`.
+Anything under `public/` is served as-is, so `public/blog/foo.webp` is `/blog/foo.webp`.
 Remote URLs work too.
 
 ## Updating experience and projects
@@ -64,9 +68,9 @@ src/
 │   ├── About.tsx
 │   ├── Experience.tsx
 │   ├── Projects.tsx
-│   └── Notes/
-│       ├── NotesList.tsx       # the feed
-│       └── Article.tsx         # the reader (lazy-loaded)
+│   └── Blog/
+│       ├── BlogList.tsx        # the feed
+│       └── Article.tsx         # the reader (lazy-loaded, KaTeX math)
 ├── content/*.md                # ← articles live here
 ├── data/                       # experience + projects
 ├── lib/posts.ts                # markdown loader
@@ -75,15 +79,18 @@ src/
 
 ## Running
 
-```bash
-docker compose up        # http://localhost:5174
-```
-
-Or locally:
+Local dev (HMR):
 
 ```bash
 bun install
 bun run dev              # http://localhost:5173
+```
+
+Production build in Docker (builds the site, then serves the static `dist/`
+with `vite preview` — not the dev server):
+
+```bash
+docker compose up --build   # http://localhost:5174
 ```
 
 ## Scripts
@@ -91,12 +98,30 @@ bun run dev              # http://localhost:5173
 | Command | Description |
 | --- | --- |
 | `bun run dev` | Dev server with HMR |
-| `bun run build` | Type-check (`tsc -b`) and build to `dist/` |
+| `bun run build` | Type-check, build to `dist/`, then prerender every route to static HTML |
+| `bun run build:ssr` | (called by `build`) SSR bundle used only by the prerender step |
+| `bun run prerender` | (called by `build`) renders each route + regenerates `sitemap.xml` |
 | `bun run preview` | Serve the built `dist/` |
 | `bun run lint` | ESLint |
 
+## SEO / prerendering
+
+The build renders every route — About, Experience, Projects, Blog, and each
+post — to a static `dist/<route>/index.html` with its content and correct
+per-route `<title>`, description, canonical, and Open Graph tags baked in, so
+crawlers and social scrapers see real HTML without running JS. In the browser
+the SPA takes over as before. The pieces:
+
+- `src/lib/seo.ts` — one source of per-route metadata (title + description).
+- `src/components/RouteSeo.tsx` — syncs the head during client-side navigation.
+- `src/entry-server.tsx` + `scripts/prerender.mjs` — the build-time renderer.
+
+Adding a post needs no extra steps: it's picked up, prerendered, and added to
+`sitemap.xml` automatically. The social preview image is `public/og-image.png`
+(1200×630).
+
 ## Deploying
 
-This is a client-routed SPA, so the host must serve `index.html` for unknown
-paths or `/notes/some-slug` will 404 on refresh. Netlify/Vercel handle this
-with a rewrite; nginx needs `try_files $uri $uri/ /index.html;`.
+Each route ships as its own `index.html`, so most paths resolve directly, and
+`vite preview` (used by the Docker image) falls back to `index.html` for
+anything else. On Netlify/Vercel, their SPA rewrite handles the same.

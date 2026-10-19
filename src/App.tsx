@@ -1,12 +1,13 @@
 import { Suspense, lazy, useEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation, useParams } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useDarkMode } from "./hooks/useDarkMode";
 import FloatingNav from "./components/FloatingNav";
-import { About, Experience, Projects, NotesList } from "./sections";
+import RouteSeo from "./components/RouteSeo";
+import { About, Experience, Projects, BlogList } from "./sections";
 
-// react-markdown only loads when someone actually opens a note.
-const Article = lazy(() => import("./sections/Notes/Article"));
+// react-markdown only loads when someone actually opens a post.
+const Article = lazy(() => import("./sections/Blog/Article"));
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -16,6 +17,12 @@ const ScrollToTop = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
   return null;
+};
+
+// The section was renamed /notes → /blog; keep old links working.
+const NoteRedirect = () => {
+  const { slug } = useParams();
+  return <Navigate to={`/blog/${slug}`} replace />;
 };
 
 function App() {
@@ -33,12 +40,9 @@ function App() {
       };
 
   return (
-    <div
-      className={`min-h-screen ${
-        darkMode ? "bg-[#262624] text-white" : "bg-white text-gray-800"
-      } transition-colors duration-300`}
-    >
+    <div className="app-shell min-h-screen transition-colors duration-300">
       <ScrollToTop />
+      <RouteSeo />
 
       <AnimatePresence mode="wait">
         <motion.main
@@ -57,11 +61,14 @@ function App() {
                 path="/projects"
                 element={<Projects darkMode={darkMode} />}
               />
-              <Route path="/notes" element={<NotesList darkMode={darkMode} />} />
+              <Route path="/blog" element={<BlogList darkMode={darkMode} />} />
               <Route
-                path="/notes/:slug"
+                path="/blog/:slug"
                 element={<Article darkMode={darkMode} />}
               />
+              {/* Redirects from the old /notes paths. */}
+              <Route path="/notes" element={<Navigate to="/blog" replace />} />
+              <Route path="/notes/:slug" element={<NoteRedirect />} />
               <Route path="*" element={<About darkMode={darkMode} />} />
             </Routes>
           </Suspense>

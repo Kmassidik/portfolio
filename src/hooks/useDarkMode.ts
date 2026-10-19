@@ -1,6 +1,12 @@
 import { useState } from "react";
 
+// No DOM during prerendering (scripts/prerender.ts renders in Node). The
+// static markup is theme-neutral; the real theme is applied in the browser
+// before first paint by the inline script in index.html.
+const hasDOM = typeof window !== "undefined";
+
 const readInitial = (): boolean => {
+  if (!hasDOM) return false;
   try {
     const saved = localStorage.getItem("darkMode");
     if (saved !== null) return JSON.parse(saved) as boolean;
@@ -11,6 +17,7 @@ const readInitial = (): boolean => {
 };
 
 const apply = (darkMode: boolean) => {
+  if (!hasDOM) return;
   try {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
   } catch {

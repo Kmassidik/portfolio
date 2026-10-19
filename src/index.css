@@ -1,6 +1,83 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------
+   App shell background / text — driven by [data-theme] (set pre-paint
+   by the inline script in index.html) rather than React state, so the
+   prerendered static markup shows the right theme on first paint with
+   no flash. Mirrors Tailwind's white / gray-800 and the dark surface.
+   --------------------------------------------------------------- */
+.app-shell {
+  background-color: #ffffff;
+  color: #1f2937;
+}
+
+[data-theme="dark"] .app-shell {
+  background-color: #262624;
+  color: #ffffff;
+}
+
+/* Images inside article bodies — responsive and centered. */
+.article img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
+/* Inline SVG diagrams. currentColor is inherited from the themed article
+   text, so these follow the site's light/dark toggle. */
+.article .diagram-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 2.2rem auto 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .diagram-flow {
+    stroke-dasharray: 7 5;
+    animation: diagram-flow 0.7s linear infinite;
+  }
+  .diagram-dot {
+    animation: diagram-ride 1.6s ease-in-out infinite;
+  }
+  .diagram-blink {
+    animation: diagram-blink 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes diagram-flow {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+
+@keyframes diagram-ride {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(92px);
+    opacity: 0;
+  }
+}
+
+@keyframes diagram-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* ---------------------------------------------------------------
    Article typography
    Charter is what Medium ships; it's already on macOS/iOS, so the
    stack costs no network request and degrades to Georgia elsewhere.

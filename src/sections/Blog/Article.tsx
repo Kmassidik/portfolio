@@ -1,10 +1,33 @@
-import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion, useScroll } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
+import type { ReactElement } from "react";
+import type { Components } from "react-markdown";
+import DockerMultiStage from "./DockerMultiStage";
+import K8sDiagram from "./K8sDiagram";
+import K8sHowItWorks from "./K8sHowItWorks";
 import { getPost, formatDate } from "../../lib/posts";
+
+// Render diagrams referenced from markdown as inline React SVGs so they follow
+// the site theme (currentColor); everything else stays a normal image.
+const diagrams: Record<string, () => ReactElement> = {
+  "/blog/docker-multistage.svg": DockerMultiStage,
+  "/blog/k3s-architecture.svg": K8sDiagram,
+  "/blog/how-kubernetes-works.svg": K8sHowItWorks,
+};
+
+const markdownComponents: Components = {
+  img(props) {
+    const Diagram = props.src ? diagrams[props.src] : undefined;
+    if (Diagram) return <Diagram />;
+    return <img src={props.src} alt={props.alt ?? ""} loading="lazy" />;
+  },
+};
 
 interface ArticleProps {
   darkMode: boolean;
@@ -16,31 +39,22 @@ const Article = ({ darkMode }: ArticleProps) => {
   const { scrollYProgress } = useScroll();
   const muted = darkMode ? "text-gray-400" : "text-gray-500";
 
-  // Effect on purpose: the tab title lives outside React, and it has to be put
-  // back when you navigate away. Nothing but a click causes it, but the restore
-  // needs a cleanup function, which only an effect gives us.
-  useEffect(() => {
-    if (!post) return;
-    const previous = document.title;
-    document.title = `${post.title} — Kurnia Massidik`;
-    return () => {
-      document.title = previous;
-    };
-  }, [post]);
+  // The tab title and head tags are handled centrally by <RouteSeo>, which
+  // reacts to the route (including this post's slug) from one meta source.
 
   if (!post) {
     return (
       <div className="w-full max-w-2xl">
-        <h1 className="text-2xl font-bold">Note not found</h1>
+        <h1 className="text-2xl font-bold">Post not found</h1>
         <p className={`mt-2 text-sm ${muted}`}>
-          That note doesn't exist, or the link is out of date.
+          That post doesn't exist, or the link is out of date.
         </p>
         <Link
-          to="/notes"
+          to="/blog"
           className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[#c15f3c] hover:underline"
         >
           <ArrowLeft size={16} />
-          All notes
+          All posts
         </Link>
       </div>
     );
@@ -56,11 +70,11 @@ const Article = ({ darkMode }: ArticleProps) => {
       />
 
       <Link
-        to="/notes"
+        to="/blog"
         className={`inline-flex items-center gap-2 text-sm font-medium transition-colors hover:text-[#c15f3c] ${muted}`}
       >
         <ArrowLeft size={16} />
-        All notes
+        All posts
       </Link>
 
       <h1 className="mt-8 text-3xl font-bold leading-tight tracking-tight md:text-[2.6rem]">
@@ -92,7 +106,13 @@ const Article = ({ darkMode }: ArticleProps) => {
       )}
 
       <article className="article mt-10">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.body}</ReactMarkdown>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm, remarkMath]}
+          rehypePlugins={[rehypeKatex]}
+          components={markdownComponents}
+        >
+          {post.body}
+        </ReactMarkdown>
       </article>
     </div>
   );

@@ -1,9 +1,7 @@
 services:
-  dev:
+  web:
     build: .
-    image: porto:dev
+    image: porto:latest
     ports:
-      - "5174:5173"
-    volumes:
-      - .:/app
-      - /app/node_modules
+      - "5174:4173"
+    restart: unless-stopped
