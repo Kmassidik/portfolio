@@ -21,6 +21,9 @@ import DataCenterPower from "./DataCenterPower";
 import DependencyTree from "./DependencyTree";
 import RadioBridge from "./RadioBridge";
 import BandWavelengths from "./BandWavelengths";
+import NlpVsLlm from "./NlpVsLlm";
+import RagPipeline from "./RagPipeline";
+import EncoderCompare from "./EncoderCompare";
 import { getPost, formatDate } from "../../lib/posts";
 
 // Render diagrams referenced from markdown as inline React SVGs so they follow
@@ -38,6 +41,9 @@ const diagrams: Record<string, () => ReactElement> = {
   "/blog/dependency-tree.svg": DependencyTree,
   "/blog/radio-bridge.svg": RadioBridge,
   "/blog/band-wavelengths.svg": BandWavelengths,
+  "/blog/nlp-vs-llm.svg": NlpVsLlm,
+  "/blog/rag-pipeline.svg": RagPipeline,
+  "/blog/encoder-compare.svg": EncoderCompare,
 };
 
 const markdownComponents: Components = {

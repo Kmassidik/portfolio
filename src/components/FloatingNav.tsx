@@ -32,7 +32,7 @@ const FloatingNav = ({ darkMode, setDarkMode }: FloatingNavProps) => {
       className="fixed inset-x-0 bottom-5 z-50 flex justify-center px-4"
     >
       <div
-        className={`flex items-center gap-0.5 rounded-full border p-1.5 shadow-lg backdrop-blur-md transition-colors duration-300 sm:gap-1 ${
+        className={`flex transform-gpu items-center gap-0.5 rounded-full border p-1.5 shadow-lg backdrop-blur-md transition-colors duration-300 [backface-visibility:hidden] [-webkit-backface-visibility:hidden] sm:gap-1 ${
           darkMode
             ? "border-white/10 bg-[#1e1e1d]/85 shadow-black/40"
             : "border-black/5 bg-white/85 shadow-black/10"

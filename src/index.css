@@ -31,6 +31,10 @@
   width: 100%;
   height: auto;
   margin: 2.2rem auto 0;
+  /* Confine each diagram's continuous animation repaints to its own box, so a
+     marching-ant line never invalidates the page behind the fixed nav (which
+     would force its backdrop-blur to re-rasterize and flicker). */
+  contain: layout paint;
 }
 
 @media (prefers-reduced-motion: no-preference) {
