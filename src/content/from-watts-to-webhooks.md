@@ -1,5 +1,5 @@
 ---
-title: From Watts to Webhooks: My Leap to Full-Stack Engineering
+title: From Watts to Webhooks, My Leap to Full-Stack Engineering
 date: 2023-11-15
 excerpt: Trading schematics for schemas and current flow for control flow. How a foundation in Electrical Engineering paved the way for a career as a Full-Stack Software Engineer.
 tags: career, full-stack, electrical-engineering, web-development, self-taught
