@@ -5,11 +5,11 @@ excerpt: The follow-up I promised. What an agent actually is (a loop, not a smar
 tags: ai, agents, llm, tool-calling, ai-engineering, self-hosted
 ---
 
-[The last post here](/blog/why-i-build-with-llms) ended on a promise: before I get
-into agents and pipelines. The pipelines half is still queued. The agents half
-stopped being optional in
-December, when AI engineering stopped being something I did in the evenings and
-became the job title on the business card. Ten months in, this is the honest
+The [foundation post](/blog/why-i-build-with-llms) ended on a promise: before I
+get into agents and pipelines. The pipelines half landed in [the RAG
+post](/blog/why-rag-beats-fine-tuning). The agents half stopped being optional
+in December, when AI engineering stopped being something I did in the evenings
+and became the job title on the business card. Ten months in, this is the honest
 version of what an agent actually is — and the first thing to know is that it is
 less than the marketing says, and more useful than that sounds.
 
@@ -73,13 +73,13 @@ chase-up email for each" and it produces a plausible essay about invoices. The
 knowledge is there; the ability to act is not. A bare LLM is a very well-read
 advisor who is not allowed to touch anything.
 
-The loop gives it hands. Retrieval — [the RAG setup from last
-time](/blog/why-i-build-with-llms) — becomes one tool among several: search the
-docs, query the database, call the API, check the calendar. The model plans in
-text, acts through tools, reads what happened, and plans again. Tasks where you
-can't pre-write the steps — because you don't know what step three is until
-step two's result comes back — become tractable. That is the honest definition
-of "agentic": open-ended tasks, *executed*, not just described.
+The loop gives it hands. Retrieval — [the RAG setup from earlier this
+year](/blog/why-rag-beats-fine-tuning) — becomes one tool among several:
+search the docs, query the database, call the API, check the calendar. The model
+plans in text, acts through tools, reads what happened, and plans again. Tasks
+where you can't pre-write the steps — because you don't know what step three is
+until step two's result comes back — become tractable. That is the honest
+definition of "agentic": open-ended tasks, *executed*, not just described.
 
 ![The agent loop. A task enters your harness, the model either calls one of your tools and the result is pasted back into its context, or it answers without a tool call and the loop ends. Guardrails wrap the loop: a step cap, a tool allowlist, human approval for side effects, and a log of every step.](/blog/agent-loop.svg)
 

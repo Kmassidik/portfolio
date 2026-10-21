@@ -36,6 +36,32 @@ const setCanonical = (html, href) =>
     (_m, p1, p2) => p1 + href + p2
   );
 
+// Two things hide the prerendered body from a visitor whose browser has JS
+// turned off:
+//
+//   1. framer-motion renders its `initial` state on the server, so the page
+//      wrapper and every list row ship `style="opacity:0;transform:..."`.
+//      The entrance animation only plays once JS hydrates.
+//   2. React parks a resolved Suspense boundary in `<div hidden id="S:0">`
+//      and reveals it with an inline script. Without JS that never runs, so
+//      the whole body stays `display:none`.
+//
+// Together those mean every page but the home page renders as a blank screen
+// without JS — the exact opposite of what this step exists for.
+//
+// A <noscript> stylesheet fixes both without touching the animated
+// experience: browsers with JS disabled parse and apply the rule, browsers
+// with JS enabled treat the contents as inert text and never apply it. So
+// the static HTML stands on its own, and the fade-in still plays normally
+// for real visitors.
+const NOSCRIPT_STYLE = `<noscript><style>
+      #root > [hidden] { display: block !important; }
+      #root [style*="opacity:0"] { opacity: 1 !important; transform: none !important; }
+      #root > .app-shell { min-height: 0 !important; }
+      #root { min-height: 100vh; background-color: #ffffff; color: #1f2937; }
+      [data-theme="dark"] #root { background-color: #262624; color: #ffffff; }
+    </style></noscript>`;
+
 for (const url of routes) {
   const { title, description } = meta(url);
   const canonical = canonicalFor(url);
@@ -44,6 +70,7 @@ for (const url of routes) {
     '<div id="root"></div>',
     `<div id="root">${await render(url)}</div>`
   );
+  html = html.replace("</head>", `    ${NOSCRIPT_STYLE}\n  </head>`);
   html = setTitle(html, title);
   html = setMeta(html, "name", "description", description);
   html = setMeta(html, "property", "og:title", title);

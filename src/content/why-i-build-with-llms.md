@@ -1,6 +1,6 @@
 ---
 title: Why I build with LLMs, and what text generation was before
-date: 2025-09-18
+date: 2025-12-08
 excerpt: Into 2025 and 2026 I moved off the servers and the soldering iron and into AI engineering. Before I touch the fancy stuff, here is the honest version of what a text-generation model actually is, what we used before it, why the new way won, and why I still bolt retrieval onto it. The five Ws and the one H, no hype.
 tags: ai, llm, nlp, rag, text-generation, machine-learning, self-hosted, career
 ---
@@ -183,9 +183,9 @@ And again: this is only text generation. One slice. The rest of what gets called
 AI is a different post, or several. But this is the foundation under all of it, and
 I wanted the first one to be the honest version rather than the magic one.
 
-Next in this series: [From answering to doing: how agents actually
-work](/blog/from-answering-to-doing-agents) — the same model, a loop around it,
-and the guardrails that make it safe to run unattended.
+Next in this series: [RAG, and why retrieval beats fine-tuning for
+facts](/blog/why-rag-beats-fine-tuning) — the pipelines half of this promise,
+including the measurement that rearranged how I think about it.
 
 ### Further reading
 
