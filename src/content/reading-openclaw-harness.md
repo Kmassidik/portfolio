@@ -258,6 +258,10 @@ interleave the volatile part before the stable part, you throw the cache away
 on every single request, and you will never see it in the latency number
 that got you fired, because the number just looks like "slow".
 
+Which engine you hand that prefix to is a separate question, and I wrote
+[the measured comparison](/blog/an-engine-is-a-rung) for it: four engines, one
+card, and a different winner at every batch size.
+
 One more, because it connects two posts. The harness also decides the **edit
 format**. Aider measured this on its laziness benchmark of 89 Python
 refactoring tasks, where GPT-4 Turbo scored **20% with search/replace blocks

@@ -28,6 +28,8 @@ import AgentLoop from "./AgentLoop";
 import RagDecision from "./RagDecision";
 import HarnessToolCall from "./HarnessToolCall";
 import EvalGrid from "./EvalGrid";
+import EngineRungs from "./EngineRungs";
+import EngineThroughput from "./EngineThroughput";
 import { getPost, formatDate } from "../../lib/posts";
 
 // Render diagrams referenced from markdown as inline React SVGs so they follow
@@ -52,6 +54,8 @@ const diagrams: Record<string, () => ReactElement> = {
   "/blog/rag-decision.svg": RagDecision,
   "/blog/harness-tool-call.svg": HarnessToolCall,
   "/blog/eval-grid.svg": EvalGrid,
+  "/blog/engine-rungs.svg": EngineRungs,
+  "/blog/engine-throughput.svg": EngineThroughput,
 };
 
 const markdownComponents: Components = {
