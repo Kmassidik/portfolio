@@ -27,6 +27,7 @@ import EncoderCompare from "./EncoderCompare";
 import AgentLoop from "./AgentLoop";
 import RagDecision from "./RagDecision";
 import HarnessToolCall from "./HarnessToolCall";
+import EvalGrid from "./EvalGrid";
 import { getPost, formatDate } from "../../lib/posts";
 
 // Render diagrams referenced from markdown as inline React SVGs so they follow
@@ -50,6 +51,7 @@ const diagrams: Record<string, () => ReactElement> = {
   "/blog/agent-loop.svg": AgentLoop,
   "/blog/rag-decision.svg": RagDecision,
   "/blog/harness-tool-call.svg": HarnessToolCall,
+  "/blog/eval-grid.svg": EvalGrid,
 };
 
 const markdownComponents: Components = {

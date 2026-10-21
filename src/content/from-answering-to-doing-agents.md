@@ -132,8 +132,8 @@ One thing I under-rated: testing. Unit tests assume the same input gives the
 same output. An agent that picks its own path hands you the same input and a
 *legitimately different* path. Evaluations, which grade whole-loop runs against
 a set of scenarios, are the replacement, and they are younger and cruder than
-unit tests. Closing that gap is the current frontier of the job, and it's
-probably the next post in this series.
+unit tests. Closing that gap is the current frontier of the job, and I wrote
+[the next post in this series](/blog/the-eval-says-it-was-wrong) about it.
 
 ### Further reading
 
