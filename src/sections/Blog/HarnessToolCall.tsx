@@ -4,7 +4,7 @@
  *   (repairing it when the model's JSON is broken); POLICY decides whether it
  *   may run, may run unattended, or needs a human; EXECUTE is where your code
  *   actually runs it; CONTEXT folds the result back into the next request.
- * The dashed line is the trust boundary — it sits before execution, and every
+ * The dashed line is the trust boundary: it sits before execution, and every
  * decision on it leaves a receipt. Source paths under each stage are the
  * files in openclaw/openclaw that implement it.
  * Inline SVG so it follows the site theme (currentColor); accent is the
@@ -123,7 +123,7 @@ const HarnessToolCall = () => {
         receiptId · action · outcome · reasonCode · coverageState · policyRefs · grantRefs
       </text>
       <text x={44} y={278} fontSize={10.5} fill={ACCENT} opacity={0.9}>
-        decisionBoundary: agent-tool.before-execute — written before the tool runs
+        decisionBoundary: agent-tool.before-execute, written before the tool runs
       </text>
 
       {/* Caption */}

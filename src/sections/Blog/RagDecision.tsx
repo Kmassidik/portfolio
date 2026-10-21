@@ -35,7 +35,7 @@ const RagDecision = () => {
       rows: [
         ["where it lives", "the context"],
         ["when it changes", "you re-index"],
-        ["can it cite", "yes — the passage"],
+        ["can it cite", "yes, the passage"],
       ],
     },
     {

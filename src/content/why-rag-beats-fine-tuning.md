@@ -1,7 +1,7 @@
 ---
 title: RAG, and why retrieval beats fine-tuning for facts
 date: 2026-04-11
-excerpt: The pipelines half of the promise from the first AI post here. What retrieval-augmented generation actually is, the pipeline stage by stage, and the decision rule I keep coming back to — facts belong in retrieval, behaviour belongs in the weights. Measured on my own box, not borrowed from a paper.
+excerpt: The pipelines half of the promise from the first AI post here. What retrieval-augmented generation actually is, the pipeline stage by stage, and the decision rule I keep coming back to: facts belong in retrieval, behaviour belongs in the weights. Measured on my own box, not borrowed from a paper.
 tags: ai, rag, llm, retrieval, embeddings, fine-tuning, self-hosted, inference
 ---
 
@@ -25,8 +25,8 @@ Not your wiki. Not last week's incident. Not the number on page 40 of a PDF
 that did not exist when the run finished. When you fine-tune on a corpus, you
 are not giving the model a copy of it. You are asking the model to absorb it
 into a few billion numbers, and then you hope the specific facts you cared
-about survived the compression. Sometimes they do. When the corpus updates —
-and it updates constantly — you do the whole thing again.
+about survived the compression. Sometimes they do. When the corpus updates,
+and it updates constantly, you do the whole thing again.
 
 Retrieval does something much less clever. It leaves the facts where they
 already are, in text, and fetches the right ones at question time.
@@ -57,7 +57,7 @@ The whole pipeline, stage by stage:
 
 I did not want to take this on faith from a blog post, so I built it and
 measured it. The corpus was 677 chunks, embedded with BGE-small, and searched
-with exact cosine — no approximate index, because the corpus was small enough
+with exact cosine and no approximate index, because the corpus was small enough
 that the exact answer was affordable and I did not want an ANN (approximate
 nearest neighbour) index quietly hiding error in my baseline.
 
@@ -71,7 +71,7 @@ Two numbers came out, and they are the whole story:
 Read them together and they tell you how to configure retrieval. recall@1 of
 75% means that grounding on the single best chunk drops the answer one time in
 four. recall@5 of 93.3% means widening to five passages recovers almost all of
-that — the answer is *there*, and now the generator's job is to find it in the
+that. The answer is *there*, and now the generator's job is to find it in the
 context.
 
 The 18-point gap between those two numbers is exactly what a reranker is
@@ -86,9 +86,9 @@ All three of these put more information in front of the model. They differ in
 
 | The gap | Reach for | Why |
 | --- | --- | --- |
-| Convention, format, style — "sound like us, answer in this shape" | fine-tune | behaviour is diffuse; it belongs in the weights, and a small LoRA teaches it cheaply |
-| Knowledge, facts — "know our docs, cite them, stay fresh" | RAG | facts change and need provenance; retrieval injects and cites them without retraining |
-| Open-ended, hard reasoning — "think through something genuinely difficult" | rent the frontier model | when capability, not knowledge, is the bottleneck, a bigger model beats any local trick |
+| Convention, format, style: "sound like us, answer in this shape" | fine-tune | behaviour is diffuse; it belongs in the weights, and a small LoRA teaches it cheaply |
+| Knowledge, facts: "know our docs, cite them, stay fresh" | RAG | facts change and need provenance; retrieval injects and cites them without retraining |
+| Open-ended, hard reasoning: "think through something genuinely difficult" | rent the frontier model | when capability, not knowledge, is the bottleneck, a bigger model beats any local trick |
 
 The measured result is the one I remember: when the task was *recalling facts*,
 teaching those facts by closed-book fine-tuning lost to simply retrieving them,
@@ -96,13 +96,13 @@ by about 2.6×. That is the empirical backbone of "facts belong in retrieval."
 
 And notice what the result does **not** say. Fine-tuning did not fail at its
 job. It was asked to do retrieval's job. If I had asked it to be more concise,
-or to use our house style, or to always answer in JSON with these keys — it
+or to use our house style, or to always answer in JSON with these keys, it
 would have won, easily, and it is still the right tool for all of those.
 
 ### Where long-context fits
 
 "Just paste it all into a 262k window" is a fourth option and sometimes the
-right one — a single large document that fits and is used once. It is not a
+right one, which is a single large document that fits and is used once. It is not a
 substitute for retrieval at scale. You pay prefill for every token on every
 request. You hit *lost in the middle* on the facts that are buried. And you
 cannot cite a passage or update it independently.
@@ -140,13 +140,13 @@ instructions, then retrieved chunks, then the question.
 
 The retrieved passages and the system prompt are a long shared prefix across
 many requests. Prefill that context once and cache it, and you skip
-recomputing it every single time — I measured up to 2.1× on long shared
+recomputing it every single time. I measured up to 2.1× on long shared
 prefixes. The catch is that it only fires when the prefix is byte-identical,
 so keep your chunk ordering stable and put the volatile part, the question,
 last.
 
 The other two levers are less fun. Every query needs an embedding before
-retrieval can even start, and I measured 279 chunks/s on the box — with the
+retrieval can even start, and I measured 279 chunks/s on the box, with the
 embedder sharing the card with the generator, so it competes for the same
 memory and the same compute. And the latency budget is a sum: embed, search,
 rerank, prefill, decode. Each stage is a slice of the SLA, and the prefill of
@@ -158,7 +158,7 @@ prefix caching pays.
 Two things worth saying plainly.
 
 **RAG is not magic, and the retriever is the ceiling.** Every downstream
-number — the answer quality, the faithfulness, the citation — is bounded by
+number. The answer quality, the faithfulness and the citation are all bounded by
 recall@k. If the retriever misses it, no amount of prompt engineering will
 recover it. Measure the retriever first, on its own, before you tune anything
 else. Retrieval and generation are two different systems with two different
@@ -167,13 +167,13 @@ metrics, and people constantly let the good one hide the bad one.
 **And it is plumbing, not intelligence.** Everything I have described here is
 boring on purpose. Chunking, embeddings, cosine similarity, a second model for
 reranking, a prompt that says "answer from these and cite them". The
-interesting part was never the technique — it was figuring out which problem I
+interesting part was never the technique. It was figuring out which problem I
 actually had. Facts or behaviour. That one question decides the whole
 architecture, and it is worth getting right before you build anything.
 
-Next in this series: [a guided read of OpenClaw's source](/blog/reading-openclaw-harness)
-— the harness that turns a retrieval pipeline into an agent, and where the
-model's authority actually ends.
+Next in this series: [a guided read of OpenClaw's source](/blog/reading-openclaw-harness),
+which covers the harness that turns a retrieval pipeline into an agent, and
+where the model's authority actually ends.
 
 ### Further reading
 

@@ -1,7 +1,7 @@
 ---
-title: Anatomy of a harness — reading OpenClaw's source, part by part
+title: Anatomy of a harness: reading OpenClaw's source, part by part
 date: 2026-08-15
-excerpt: The agent loop is the smallest part of an agent. I read the biggest open-source harness there is — OpenClaw — part by part: where the model stops and your code starts, what a tool-call receipt actually contains, how the loop decides it is stuck, and how the context window is treated like a budget. My own harness stays private. This is the public one, read properly.
+excerpt: The agent loop is the smallest part of an agent. I read the biggest open-source harness there is, OpenClaw, part by part: where the model stops and your code starts, what a tool-call receipt actually contains, how the loop decides it is stuck, and how the context window is treated like a budget. My own harness stays private. This is the public one, read properly.
 tags: ai, agents, llm, tool-calling, harness, open-source, inference, self-hosted
 ---
 
@@ -11,14 +11,14 @@ in progress, and it is a decision I will keep making for a while.
 
 But here is the thing about harnesses: they are not secret. Every design
 decision in mine shows up, somewhere, in somebody else's public repository.
-OpenClaw is the biggest one I know of — an open-source assistant that runs on
+OpenClaw is the biggest one I know of: an open-source assistant that runs on
 your own devices and talks to you through Discord, iMessage, Slack, Telegram,
 WhatsApp and twenty other channels. Its repository is enormous and, more
 importantly, it is *legible*. Someone clearly thought about the boundaries.
 
 So this is the post I wanted to write instead of showing mine: a proper read of
 OpenClaw's source, part by part, mapped onto the things a harness has to
-decide. Everything here is checkable — every path I mention is in the repo,
+decide. Everything here is checkable, since every path I mention is in the repo,
 and I link to the files.
 
 ### Why read somebody else's harness
@@ -27,7 +27,7 @@ First, because the harness is worth more than most people think it is.
 
 The cleanest evidence is a benchmark that holds the model fixed and swaps the
 harness. Terminal-Bench scores agents on real terminal tasks, and its
-maintainers ship a neutral reference agent called Terminus — one tool, an
+maintainers ship a neutral reference agent called Terminus with one tool, an
 interactive tmux session, any model through LiteLLM. Run the same weights in
 Terminus and in the vendor's own CLI and the gap is not small.
 
@@ -42,7 +42,7 @@ Same weights. Twenty-nine points. That is bigger than the gap between many
 adjacent model generations, and it is not a model property at all.
 
 Two things to take from the table. The gap can be enormous. And it is not
-always in the vendor's favour — Gemini 3.1 Pro does *better* in the neutral
+always in the vendor's favour. Gemini 3.1 Pro does *better* in the neutral
 Terminus than in Gemini CLI, because a harness is tuned to a model, a task
 distribution and a set of habits, and it can be tuned wrong.
 
@@ -75,7 +75,7 @@ Nine responsibilities, and OpenClaw has a directory for each:
 That last column is the useful part. When you know a codebase's vocabulary,
 you can read its decisions. OpenClaw's own architecture note puts it plainly:
 the runtime lives in `src/agents/`, transport in `src/llm/`, and plugins are
-only allowed through `openclaw/plugin-sdk/*` barrels — they do not import
+only allowed through `openclaw/plugin-sdk/*` barrels, so they do not import
 `src/**` internals. That boundary is enforced by code, which is the whole
 point.
 
@@ -89,7 +89,7 @@ Look at the third box: **policy**. Not "the model was asked to be careful". Not
 "the system prompt says be careful". A code path that decides.
 
 And look at where the boundary is drawn. It is *before* execution, not after.
-The moment that matters is not "what did the tool do" — it is "was this call
+The moment that matters is not "what did the tool do", it is "was this call
 allowed to happen at all".
 
 ### Every decision leaves a receipt
@@ -123,7 +123,7 @@ There is a subtlety I like even more. The decision function is wrapped in an
 `AsyncLocalStorage` scope that tracks whether an owner-native decision record
 was already registered, so the generic fallback does not double-write a
 decision that a more specific owner already recorded. One decision, one
-receipt — even when four layers of policy all have an opinion.
+receipt, even when four layers of policy all have an opinion.
 
 This is the same seam I described in [the agents post](/blog/from-answering-to-doing-agents):
 the model can only *propose*, the harness *disposes*. OpenClaw just writes the
@@ -148,10 +148,11 @@ const TOOLCALL_REPAIR_SMART_QUOTES = new Set(["\u201c", "\u201d", "\u201e", "\u2
 Curly quotes. That is the bug. Models cheerfully write `{"path": “src/main.ts”}`
 and a strict JSON parser throws, so the tool call never happens and the agent
 sits there. The repair layer normalises them, trims leading and trailing
-garbage, and — this is the part I would not have guessed — keeps a **whitelist
+garbage, and keeps a **whitelist
 of known argument keys** (`cmd`, `command`, `cwd`, `path`, `old_str`,
 `new_str`, `pattern`, `query`, …) so a repaired blob can be matched to a tool
-whose schema it was probably meant for.
+whose schema it was probably meant for. That whitelist is the part I would not
+have guessed.
 
 None of this is exotic. All of it is load-bearing, because a tool call that
 fails to parse is a turn that produces nothing but an error message.
@@ -159,7 +160,7 @@ fails to parse is a turn that produces nothing but an error message.
 And it is not a theoretical problem. When I ran my first hand-written loop
 against SmolLM2-360M, the tool description said `TOOL: list_files DIR`, and
 the model asked for a directory literally named `DIR`. Eight times in a row.
-The model never reads your tool's code — it reads your tool's *name*, your
+The model never reads your tool's code. It reads your tool's *name*, your
 *schema*, and your *description*. Everything you would tell a junior engineer,
 you have to tell the model instead.
 
@@ -186,7 +187,7 @@ with thresholds named in the file: `TOOL_LOOP_WARNING_THRESHOLD = 10`,
 window.
 
 The clever part is how it decides two failures are *the same* failure. It
-hashes tool outcomes — but strips volatile fields first. Delivery IDs, debug
+hashes tool outcomes, but strips volatile fields first. Delivery IDs, debug
 keys, memory-search internals: all removed before hashing, so "the same error
 with a different request id" hashes the same and still counts as a repeat. If
 you do not strip those fields you will never detect the loop, because every
@@ -194,8 +195,8 @@ iteration looks new.
 
 There is also a separate idea for the `exec` tool: real terminal failures may
 legitimately repeat with fresh arguments, so only a *contiguous* tail of typed
-failures counts as no-progress. And argument-validation rejections — calls
-that never ran — neither extend nor end a failure streak, because they never
+failures counts as no-progress. And argument-validation rejections, which are calls
+that never ran, neither extend nor end a failure streak, because they never
 executed.
 
 This is the same shape as the step cap I insist on in my own harness, with a
@@ -207,8 +208,8 @@ lot more care about the definition of "same". The cap is the easy half.
 found genuinely instructive.
 
 It bounds the model view by walking the message list **backwards**, adding up
-bytes and estimated tokens until it hits `maxBytes`. Then it cuts — but not
-anywhere. It cuts at a `user` message, because you cannot leave a `tool_use`
+bytes and estimated tokens until it hits `maxBytes`. Then it cuts, but not at an
+arbitrary point. It cuts at a `user` message, because you cannot leave a `tool_use`
 behind without its `tool_result`: the model would see a request with no
 answer and, reasonably, get confused. The file calls the helper
 `classifyToolUseResultPairing` and walks past any frame whose result was
@@ -217,7 +218,7 @@ dropped, so the cut never orphans a call.
 Two details I would not have written myself:
 
 - The comment *"Ordinary token pressure still belongs to semantic
-  compaction"* — this bounded view is a last resort, not the primary
+  compaction"*. This bounded view is a last resort, not the primary
   mechanism. If you are routinely hitting the byte budget, you are compacting
   at the wrong layer.
 - The cut is fingerprinted: `sha256` over the projection, the budget, the
@@ -228,8 +229,8 @@ Two details I would not have written myself:
   the omitted messages."*
 
 That is a bug class you only find in production. If you store the bounded
-view alongside the full history, the model sees every message twice — once
-through the projection and once through the store — and you spend tokens on
+view alongside the full history, the model sees every message twice, once
+through the projection and once through the store, and you spend tokens on
 ghosts.
 
 ### The inference engineer's view
@@ -240,26 +241,26 @@ An agent re-sends its entire prompt every turn. The system prompt and the tool
 list are the prefix, and if that prefix is byte-identical between turns, the
 engine can reuse its cached keys and values and only prefill the new tail.
 OpenClaw treats this as a first-class concern: there are five separate
-modules under `embedded-agent-runner/` for it — `google-prompt-cache.ts`,
+modules under `embedded-agent-runner/` for it: `google-prompt-cache.ts`,
 `prompt-cache-history.ts`, `prompt-cache-retention.ts`,
-`prompt-cache-observability.ts`, `prompt-cache-request-observer.ts` — plus
+`prompt-cache-observability.ts`, `prompt-cache-request-observer.ts`, plus
 secret-redaction sentinels so a cached prefix never leaks a credential.
 
 I measured the same effect on my own box: a repeated 3,064-token context with
 2,548 tokens of prefix reused went from **4.54 s to 1.07 s time to first
-token — 4.2×**. And the wasteful version is the default. A single agent
+token (4.2×)**. And the wasteful version is the default. A single agent
 conversation costs about **4.6× more than the tokens it actually produced**,
 and by turn eight that multiplier is **13.6×**.
 
 The harness decides this. Whether the prefix is stable is a property of how
 you assemble the prompt, not of the model. If you edit the tool list, or
 interleave the volatile part before the stable part, you throw the cache away
-on every single request — and you will never see it in the latency number
+on every single request, and you will never see it in the latency number
 that got you fired, because the number just looks like "slow".
 
 One more, because it connects two posts. The harness also decides the **edit
-format**. Aider measured this on its laziness benchmark — 89 Python
-refactoring tasks — where GPT-4 Turbo scored **20% with search/replace blocks
+format**. Aider measured this on its laziness benchmark of 89 Python
+refactoring tasks, where GPT-4 Turbo scored **20% with search/replace blocks
 and 61% with unified diffs**. Same model, same harness, different wire
 format. And on my own ternary endpoint, free n-gram speculation ran a code
 rewrite at **51–53 tok/s against a 33 tok/s baseline**, which means a
@@ -288,14 +289,14 @@ What I took:
 What I did not take: the scale. This repository is enormous, and the
 authoritative runtime is split across `src/agents/` and
 `packages/agent-core/`, with dozens of files per concern. Some of that is
-legitimate — a harness that runs unattended for weeks on twenty chat channels
+legitimate. A harness that runs unattended for weeks on twenty chat channels
 needs more moving parts than one that runs for ten turns in a terminal. Some
 of it is just what happens when a project gets popular.
 
 And the thing I keep coming back to: **the harness is half the agent, and the
 other half is the tool descriptions.** Anthropic put it plainly in *Building
-effective agents* — "we actually spent more time optimizing our tools than the
-overall prompt" — and the Terminal-Bench table is the receipt. SWE-agent named
+effective agents*: "we actually spent more time optimizing our tools than the
+overall prompt", and the Terminal-Bench table is the receipt. SWE-agent named
 the idea formally: the agent-computer interface deserves the same design care
 we give human-computer interfaces. And mini-swe-agent, from the same group,
 gets over 74% on SWE-bench Verified with about a hundred lines of Python and
@@ -306,18 +307,18 @@ is also much easier to debug, and much easier to evaluate. That is the whole
 argument.
 
 Next in this series: [From answering to doing: how agents actually
-work](/blog/from-answering-to-doing-agents) — the loop itself, what tool
+work](/blog/from-answering-to-doing-agents), which covers the loop itself, what tool
 calling really is, and the four guardrails I will not ship an agent without.
 
 ### Further reading
 
-- [OpenClaw](https://github.com/openclaw/openclaw) — the repository this is a reading of
-- [Why OpenClaw](https://docs.openclaw.ai/start/why-openclaw) — the architecture case: trusted gateway, untrusted execution, policy enforced by code
-- [Agent runtime architecture](https://github.com/openclaw/openclaw/blob/main/docs/agent-runtime-architecture.md) — the runtime layout table, from the project itself
-- [`run-loop.ts`](https://github.com/openclaw/openclaw/blob/main/src/agents/embedded-agent-runner/run-loop.ts) — the attempt loop
-- [`tool-loop-detection.ts`](https://github.com/openclaw/openclaw/blob/main/src/agents/tool-loop-detection.ts) — the six stuck-detectors and their thresholds
-- [`bounded-context.ts`](https://github.com/openclaw/openclaw/blob/main/src/context-engine/bounded-context.ts) — cutting context without orphaning a tool call
-- [`agent-tools.before-tool-call.decision.ts`](https://github.com/openclaw/openclaw/blob/main/src/agents/agent-tools.before-tool-call.decision.ts) — the decision receipt
-- [Terminal-Bench](https://tbench.ai) — the benchmark behind the harness-effect table
-- [SWE-agent](https://arxiv.org/abs/2405.15793) — the agent-computer interface paper
-- [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) — the workflow/agent line, and the tools-first advice
+- [OpenClaw](https://github.com/openclaw/openclaw), the repository this is a reading of
+- [Why OpenClaw](https://docs.openclaw.ai/start/why-openclaw), the architecture case: trusted gateway, untrusted execution, policy enforced by code
+- [Agent runtime architecture](https://github.com/openclaw/openclaw/blob/main/docs/agent-runtime-architecture.md), the runtime layout table, from the project itself
+- [`run-loop.ts`](https://github.com/openclaw/openclaw/blob/main/src/agents/embedded-agent-runner/run-loop.ts), the attempt loop
+- [`tool-loop-detection.ts`](https://github.com/openclaw/openclaw/blob/main/src/agents/tool-loop-detection.ts), the six stuck-detectors and their thresholds
+- [`bounded-context.ts`](https://github.com/openclaw/openclaw/blob/main/src/context-engine/bounded-context.ts), cutting context without orphaning a tool call
+- [`agent-tools.before-tool-call.decision.ts`](https://github.com/openclaw/openclaw/blob/main/src/agents/agent-tools.before-tool-call.decision.ts), the decision receipt
+- [Terminal-Bench](https://tbench.ai), the benchmark behind the harness-effect table
+- [SWE-agent](https://arxiv.org/abs/2405.15793), the agent-computer interface paper
+- [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents), the workflow/agent line, and the tools-first advice

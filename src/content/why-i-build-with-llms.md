@@ -184,7 +184,7 @@ AI is a different post, or several. But this is the foundation under all of it, 
 I wanted the first one to be the honest version rather than the magic one.
 
 Next in this series: [RAG, and why retrieval beats fine-tuning for
-facts](/blog/why-rag-beats-fine-tuning) — the pipelines half of this promise,
+facts](/blog/why-rag-beats-fine-tuning), which is the pipelines half of this promise,
 including the measurement that rearranged how I think about it.
 
 ### Further reading

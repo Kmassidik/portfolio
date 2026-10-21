@@ -18,7 +18,7 @@ const Experience = ({ darkMode }: ExperienceProps) => {
           Experience
         </h1>
         <p className={`mt-2 text-sm ${muted}`}>
-          Electrical engineering to AI systems — Sep 2018 to now.
+          Electrical engineering to AI systems. Sep 2018 to now.
         </p>
       </header>
 
