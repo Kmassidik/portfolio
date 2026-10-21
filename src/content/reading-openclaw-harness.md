@@ -1,5 +1,5 @@
 ---
-title: Anatomy of a harness: reading OpenClaw's source, part by part
+title: Anatomy of a harness, reading OpenClaw's source, part by part
 date: 2026-08-15
 excerpt: The agent loop is the smallest part of an agent. I read the biggest open-source harness there is, OpenClaw, part by part: where the model stops and your code starts, what a tool-call receipt actually contains, how the loop decides it is stuck, and how the context window is treated like a budget. My own harness stays private. This is the public one, read properly.
 tags: ai, agents, llm, tool-calling, harness, open-source, inference, self-hosted
@@ -306,7 +306,7 @@ A small, predictable harness around a strong model can match a heavy one. It
 is also much easier to debug, and much easier to evaluate. That is the whole
 argument.
 
-Next in this series: [From answering to doing: how agents actually
+Next in this series: [From answering to doing, how agents actually
 work](/blog/from-answering-to-doing-agents), which covers the loop itself, what tool
 calling really is, and the four guardrails I will not ship an agent without.
 

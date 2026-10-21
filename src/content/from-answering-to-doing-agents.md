@@ -1,5 +1,5 @@
 ---
-title: From answering to doing: how agents actually work
+title: From answering to doing, how agents actually work
 date: 2026-10-21
 excerpt: The follow-up I promised. What an agent actually is (a loop, not a smarter model), what tool calling really is (the model proposes, your code disposes), why the loop compounds capability and error at the same time, and the guardrails that make one shippable. No hype.
 tags: ai, agents, llm, tool-calling, ai-engineering, self-hosted
