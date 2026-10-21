@@ -58,7 +58,8 @@ left the realm of text. It is still guessing the next token; it just happens to
 be fluent in a grammar of tool calls.
 
 Internalize that, because it tells you exactly where the trust boundary is. The
-model can only *propose*; the harness — your code — *disposes*. If a tool can
+model can only *propose*; [the harness](/blog/reading-openclaw-harness) — your
+code — *disposes*. If a tool can
 drop a database, the model can ask for a database drop as many times as it
 likes, and nothing happens unless your executor is willing to do it. Every
 security story in agents lives at that seam, and I'll come back to it in the

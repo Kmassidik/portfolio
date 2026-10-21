@@ -171,8 +171,9 @@ interesting part was never the technique — it was figuring out which problem I
 actually had. Facts or behaviour. That one question decides the whole
 architecture, and it is worth getting right before you build anything.
 
-Next in this series: the agents half of the promise, and what happens when the
-retriever becomes one tool among several.
+Next in this series: [a guided read of OpenClaw's source](/blog/reading-openclaw-harness)
+— the harness that turns a retrieval pipeline into an agent, and where the
+model's authority actually ends.
 
 ### Further reading
 
