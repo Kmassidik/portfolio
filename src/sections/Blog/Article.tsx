@@ -24,6 +24,7 @@ import BandWavelengths from "./BandWavelengths";
 import NlpVsLlm from "./NlpVsLlm";
 import RagPipeline from "./RagPipeline";
 import EncoderCompare from "./EncoderCompare";
+import AgentLoop from "./AgentLoop";
 import { getPost, formatDate } from "../../lib/posts";
 
 // Render diagrams referenced from markdown as inline React SVGs so they follow
@@ -44,6 +45,7 @@ const diagrams: Record<string, () => ReactElement> = {
   "/blog/nlp-vs-llm.svg": NlpVsLlm,
   "/blog/rag-pipeline.svg": RagPipeline,
   "/blog/encoder-compare.svg": EncoderCompare,
+  "/blog/agent-loop.svg": AgentLoop,
 };
 
 const markdownComponents: Components = {

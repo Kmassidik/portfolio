@@ -183,6 +183,10 @@ And again: this is only text generation. One slice. The rest of what gets called
 AI is a different post, or several. But this is the foundation under all of it, and
 I wanted the first one to be the honest version rather than the magic one.
 
+Next in this series: [From answering to doing: how agents actually
+work](/blog/from-answering-to-doing-agents) — the same model, a loop around it,
+and the guardrails that make it safe to run unattended.
+
 ### Further reading
 
 - [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/), still the clearest picture of how the modern model actually attends to context
