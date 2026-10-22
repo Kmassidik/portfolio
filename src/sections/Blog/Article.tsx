@@ -30,6 +30,9 @@ import HarnessToolCall from "./HarnessToolCall";
 import EvalGrid from "./EvalGrid";
 import EngineRungs from "./EngineRungs";
 import EngineThroughput from "./EngineThroughput";
+import CrashTimeline from "./CrashTimeline";
+import ModelMemory from "./ModelMemory";
+import ImageQueue from "./ImageQueue";
 import { getPost, formatDate } from "../../lib/posts";
 
 // Render diagrams referenced from markdown as inline React SVGs so they follow
@@ -56,6 +59,9 @@ const diagrams: Record<string, () => ReactElement> = {
   "/blog/eval-grid.svg": EvalGrid,
   "/blog/engine-rungs.svg": EngineRungs,
   "/blog/engine-throughput.svg": EngineThroughput,
+  "/blog/crash-timeline.svg": CrashTimeline,
+  "/blog/model-memory.svg": ModelMemory,
+  "/blog/image-queue.svg": ImageQueue,
 };
 
 const markdownComponents: Components = {
