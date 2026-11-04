@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { featured, earlier } from "../data/projects";
+import { featured, selfProjects, earlier } from "../data/projects";
 import type { Project } from "../data/projects";
 import ProjectCard from "./Projects/ProjectCard";
 import ProjectModal from "./Projects/ProjectModal";
@@ -24,7 +24,7 @@ const Projects = ({ darkMode }: ProjectsProps) => {
         </p>
       </header>
 
-      {/* Featured grid */}
+      {/* Client / work projects */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {featured.map((project, i) => (
           <ProjectCard
@@ -36,6 +36,24 @@ const Projects = ({ darkMode }: ProjectsProps) => {
           />
         ))}
       </div>
+
+      {/* Self / personal projects */}
+      <section className={`mt-12 border-t pt-8 ${divider}`}>
+        <h2 className={`mb-6 text-xs font-semibold uppercase tracking-wider ${muted}`}>
+          Self-hosted &amp; personal
+        </h2>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {selfProjects.map((project, i) => (
+            <ProjectCard
+              key={project.name}
+              project={project}
+              index={i}
+              darkMode={darkMode}
+              onClick={() => setActive(project)}
+            />
+          ))}
+        </div>
+      </section>
 
       {/* Earlier work */}
       <section className={`mt-12 border-t pt-8 ${divider}`}>
