@@ -13,6 +13,9 @@ dist-ssr
 ssr-dist
 *.local
 
+# Private / personal docs — never committed
+private/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
